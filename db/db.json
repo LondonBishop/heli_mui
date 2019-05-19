@@ -1,0 +1,161 @@
+{ 
+  "user" : [
+  { 
+    "id": 1,
+    "entity" : "bank", 
+    "account_desc" : "Barclays",
+    "sortcode" : "20-90-56",
+    "accountnumber" : "2341893",
+    "balance" : 2650.39,
+    "transactions" : [
+              {
+                "transtype" : "debit",  
+                "date" : "13/04/2019",
+                "trans_desc" : "Pret Coffee",
+                "amount" : -2.75
+              },
+              {
+              "transtype" : "credit",  
+              "date" : "12/04/2019",
+              "trans_desc" : "Interest",
+              "amount" : 1.06
+            },
+            {
+              "transtype" : "debit",  
+              "date" : "12/04/2019",
+              "trans_desc" : "Virgin Media",
+              "amount" : -59.99
+            },
+            {
+              "transtype" : "debit",  
+              "date" : "11/04/2019",
+              "trans_desc" : "Legal & General",
+              "amount" : 459.66
+            }   
+      ]
+    }, 
+    {   
+      "id" : 2,
+      "entity" : "bank",
+      "account_desc" : "Santander",
+      "sortcode" : "11-62-45",
+      "account" : "4621911",
+      "balance" : 798.11,
+      "transactions" : [
+                      {
+                        "transtype" : "credit",  
+                        "date" : "13/04/2019",
+                        "trans_desc" : "PND Salary",
+                        "amount" : 1233.01
+                      },
+                      {
+                      "transtype" : "credit",  
+                      "date" : "12/04/2019",
+                      "trans_desc" : "Barclays TFR",
+                      "amount" : 600.00
+                    },
+                    {
+                      "transtype" : "debit",  
+                      "date" : "12/04/2019",
+                      "trans_desc" : "Spotify Inc.",
+                      "amount" : -4.99
+                    }
+        ]
+    },
+    {
+      "id" : 3,
+      "entity" : "credit card",
+      "account_desc" : "Virgin money",
+      "sortcode" : "",
+      "account" : "465912118097",
+      "balance" : -598.23,
+      "transactions" : [
+                      {
+                        "transtype" : "debit",  
+                        "date" : "13/04/2019",
+                        "trans_desc" : "TFL",
+                        "amount" : 8.00
+                      },
+                      {
+                      "transtype" : "debit",  
+                      "date" : "12/04/2019",
+                      "trans_desc" : "Pizza Express",
+                      "amount" : 62.50
+                    },
+                    {
+                      "transtype" : "debit",  
+                      "date" : "11/04/2019",
+                      "trans_desc" : "Udemy Inc",
+                      "amount" : -12.99
+                    }
+              
+        ]
+    },
+    {
+      "id" : 4,
+      "entity" : "bill",
+      "account_desc" : "Gas",
+      "sortcode" : "",
+      "account" : "465912118097",
+      "balance" : -598.23,
+      "transactions" : [
+              {
+                "duedate" : "21/04/2019",
+                "paidfrom" : 2,
+                "amount": -69.22,
+                "recurring" : "month"  
+              }
+      ]
+    },
+    {
+      "id" : 5,
+      "entity" : "bill",
+      "account_desc" : "CoffeeClub",
+      "sortcode" : "",
+      "account" : "465912118097",
+      "balance" : -19.22,
+      "transactions" : [
+              {
+                "duedate" : "19/04/2019",
+                "bill_desc" : "CoffeeClub",
+                "paidfrom" : 3,
+                "amount": -19.22,
+                "recurring" : "week"    
+              }
+      ]
+    },
+    {
+      "id" : 6,
+      "entity" : "bill",
+      "account_desc" : "TV Licence",
+      "sortcode" : "",
+      "account" : "465912118097",
+      "balance" : -19.22,
+      "transactions" : [
+              {
+                "duedate" : "20/04/2019",
+                "paidfrom" : 2,
+                "amount": -24.00,
+                "recurring" : "month"   
+              }
+      ]
+    },
+    {
+      "id" : 7,
+      "entity" : "bill",
+      "account_desc" : "Car Insurance",
+      "sortcode" : "",
+      "account" : "465912118097",
+      "balance" : -19.22,
+      "transactions" : [
+              {
+                "duedate" : "21/04/2019",
+                "bill_desc" : "Car Insurance",
+                "paidfrom" : 3,
+                "amount": -111.00,
+                "recurring" : "21/04"   
+              }
+      ]
+    }
+  ]
+}
