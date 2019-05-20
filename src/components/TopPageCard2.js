@@ -11,26 +11,26 @@ export default class TopPageCard2 extends Component {
 
     render() {
 
-        const { tile, handleEditCard, handleSelectCard } = this.props
+        const { account, handleEditCard, handleSelectCard } = this.props
 
         return (
 
             <div>
-                { tile ? (
+                { account ? (
                     <Card>
                     <CardContent>
                         <Typography style={ { fontSize:18} } >
-                                {tile.account_desc}
+                                {account.account_desc}
                         </Typography>
                         <Typography component='p' style={ { fontSize:24, fontWeight:"bold" } }>
-                                £{tile.balance}
+                                £{account.balance}
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button key={tile.id} size="small" color="primary" onClick={ (e) => { handleSelectCard(e) } } >
+                        <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleSelectCard(e) } } >
                                 Select
                         </Button>
-                        <Button key={tile.id} size="small" color="primary" onClick={ (e) => { handleEditCard(e) } } >
+                        <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleEditCard(e) } } >
                                 Edit
                         </Button>
                     </CardActions>

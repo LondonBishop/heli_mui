@@ -34,7 +34,9 @@ const data = [
 
 function SimpleTable(props) {
   
-  const { classes } = props;
+  const { classes, inBoundData } = props;
+
+  debugger
 
   return (
     <Paper className={classes.root}>
@@ -54,7 +56,7 @@ function SimpleTable(props) {
               <TableCell component="th" scope="row">
                 {n.name}
               </TableCell>
-              <TableCell align="right">{n.calories}</TableCell>
+              <TableCell align="right">{inBoundData[0].transactions[0].trans_desc}</TableCell>
               <TableCell align="right">{n.fat}</TableCell>
               <TableCell align="right">{n.carbs}</TableCell>
               <TableCell align="right">{n.protein}</TableCell>

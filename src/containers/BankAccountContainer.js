@@ -10,18 +10,27 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
 import TopPageCard2 from '../components/TopPageCard2'
 import BankAccountTop from '../components/BankAccountTop'
-
+import SimpleTable from '../components/SimpleTable'
+import BankTable from '../components/BankTable'
 
 
 // const tileData =[ {name: "Barclays", balance : "2,650.44"}, {name : "Citi", balance: "12.99"}, {name : "Halifax Saver", balance: "36,500.99"}]
 
-
 class BankAccountContainer extends Component {
 
-      state = {
-        currentEntityType : "",
-        currentEntityTypeData : [],
-      }
+
+  constructor (props) {
+    super(props);
+
+    let intialBankTransactions = props.inBoundData[0].transactions
+
+    this.state ={
+      selectedBankId: props.inBoundData[0].id,
+      selectedBankTransactions : intialBankTransactions,  
+      };
+    }
+
+
 
 // EVENT handlers **************************************************
 
@@ -36,21 +45,55 @@ class BankAccountContainer extends Component {
         this.switchBottomPageView();
       }
 
-
       switchBottomPageView = () => {
-
       }
 
-// * CLASS ****************************************************************** 
+      componentDidMount () {
+      }
 
+      setInitialView (props) {
+      
+            let intialBankTransactions = props.inBoundData[0].transactions
+
+            this.setState ( { 
+                selectedBankId : props.inBoundData[0].id,
+                selectedBankTransactions : intialBankTransactions,
+            });
+        
+            return ( <div className={ this.classes.tableContainer}>
+              <BankTable inBoundData={ this.state.selectedBankTransactions } />
+            </div>)
+      }
+
+
+// * CLASS ****************************************************************** 
 
       render() {
 
         const { classes, inBoundData } = this.props
+        
+        console.log ("Bank Account Container ")
 
+        let temp = inBoundData[0] ? ( this.setInitialView() ) : null
+        
         return (
+
           <div className={classes.root}>
-              <BankAccountTop inBoundData ={ inBoundData }/>
+              <div className={classes.gridList}>
+                  <BankAccountTop inBoundData ={ inBoundData }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+              </div>
+              <div className={classes.appBarSpacer} />
+              {/* { 
+                inBoundData[0]
+                ? 
+                <div className={classes.tableContainer}>
+                  <BankTable inBoundData={ inBoundData } />
+                </div>
+                : null
+              } */}
+                
+                <BankTable inBoundData={ this.state.selectedBankTransactions } />
+              
           </div>
         );
       }
@@ -66,19 +109,19 @@ class BankAccountContainer extends Component {
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
       },
-      // gridList: {
-      //   flexWrap: 'nowrap',
-      //   // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      //   transform: 'translateZ(0)',
-      //   cols : 1
-      // },
-      // title: {
-      //   color: theme.palette.primary.light,
-      // },
-      // titleBar: {
-      //   background:
-      //     'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-      // },
+      gridList: {
+        flexWrap: 'nowrap',
+        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+        transform: 'translateZ(0)',
+        cols : 1
+      },
+      title: {
+        color: theme.palette.primary.light,
+      },
+      titleBar: {
+        background:
+          'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+      },
     });
     
 

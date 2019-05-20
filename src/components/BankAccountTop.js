@@ -19,16 +19,16 @@ class BankAccountTop extends Component {
 
       render() {
 
-        const { classes, inBoundData } = this.props
+        const { classes, inBoundData, handleSelectCard, handleEditCard  } = this.props
 
         return (
 
           <div className={classes.root}>
 
               <Grid container spacing={24} style ={ { padding:24 } }>
-                  {inBoundData.map( tile  => (
-                      <Grid item xs={12} sm={6} lg={4} xl={3} >
-                          <TopPageCard2 tile={ tile } handleEditCard={ this.handleEditCard } handleSelectCard={ this.handleSelectCard } />
+                  {inBoundData.map( account  => (
+                      <Grid item xs={12} sm={6} lg={6} xl={3} >
+                          <TopPageCard2 account={ account } handleEditCard={ handleEditCard } handleSelectCard={ handleSelectCard } />
                       </Grid> ) ) }
               </Grid>
 
