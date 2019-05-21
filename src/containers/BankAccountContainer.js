@@ -12,6 +12,7 @@ import TopPageCard2 from '../components/TopPageCard2'
 import BankAccountTop from '../components/BankAccountTop'
 import SimpleTable from '../components/SimpleTable'
 import BankTable from '../components/BankTable'
+import Divider from '@material-ui/core/Divider';
 
 
 // const tileData =[ {name: "Barclays", balance : "2,650.44"}, {name : "Citi", balance: "12.99"}, {name : "Halifax Saver", balance: "36,500.99"}]
@@ -96,7 +97,7 @@ class BankAccountContainer extends Component {
               <div className={classes.gridList}>
                   <BankAccountTop BankAccounts ={ BankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
               </div>
-              <div className={classes.appBarSpacer} />
+              <Divider variant="middle" style={ { marginTop : 45 } }/>
               {/* <BottomData firstTimeInFlag={firstTimeInFlag} /> */}
              
               {/* {  !inBoundData[0] && this.state.selectedBankId ? 
@@ -119,8 +120,8 @@ class BankAccountContainer extends Component {
         
                 {/* <BankTable inBoundData={ this.state.account } /> */}
             { this.state.selectedAccount ?
-                 <BankTable account={ this.state.selectedAccount } />:
-                 <BankTable account={""}/>} 
+                 <BankTable account={ this.state.selectedAccount } />: null }
+                  {/* <BankTable account={""}/>}  */}
               {/* {<BankTable inBoundData={ this.state.account } />} */}
           </div>
         );
