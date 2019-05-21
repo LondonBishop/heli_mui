@@ -111,6 +111,8 @@ class Dashboard extends React.Component {
     bankAccounts  : [],
     creditcards : [],
     bills : [],
+    netWorthWithBills: [],
+    netWorthWithOutBills : [],
     topPage : "accounts",
     bottomPage : null,
   };
@@ -163,7 +165,7 @@ class Dashboard extends React.Component {
     });
   }
  
-
+// methods *********************************************
 
   switchTopPage  = () => {
 
@@ -190,6 +192,11 @@ class Dashboard extends React.Component {
       }
   }
 
+
+  calculateNetWorth = () => {
+    
+
+  }
 
 
   // **************************************************
