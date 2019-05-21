@@ -12,18 +12,18 @@ export default class BillsContainer extends Component {
     
     render () {
 
-        const { Bills } = this.props
+        const { Bills, TotalBills } = this.props
 
         return (
             <div>
                 <BillSelectorContainer  />
                 <Divider variant="middle" style={ { marginBottom: 15 } }/>
                 <Typography variant="h6" gutterBottom component="h2">
-                    Bills To Pay!
+                    Payments coming up...
                 </Typography>
                 <BillsTable Bills= { Bills } />
                 <Divider variant="middle" style={ { marginTop: 15 } }/>
-                <BillTotal billsTotal={ 100 } />
+                <BillTotal TotalBills={ TotalBills } />
             </div>
         );
     }

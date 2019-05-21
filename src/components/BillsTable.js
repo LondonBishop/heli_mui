@@ -33,8 +33,8 @@ class BillsTable extends Component {
              
               <TableHead>
                 <TableRow>
+                  <TableCell align="left">Company</TableCell>
                   <TableCell>Due Date</TableCell>
-                  <TableCell align="left">Description</TableCell>
                   <TableCell align="left" style={ { fontWeight:"bold" } }>Amount</TableCell>
                   <TableCell align="left">How Often?</TableCell>
                 </TableRow>
@@ -44,8 +44,8 @@ class BillsTable extends Component {
                 { Bills ? 
                  Bills.map( dataRow => (
                         <TableRow>
-                          <TableCell component="th" scope="row">{dataRow.transactions[0].duedate}</TableCell>
-                          <TableCell align="left">{dataRow.account_desc}</TableCell>
+                          <TableCell component="th" scope="row" align="left">{dataRow.account_desc}</TableCell>
+                          <TableCell align="left">{dataRow.transactions[0].duedate}</TableCell>
                           <TableCell align="left">{dataRow.transactions[0].amount}</TableCell>
                           <TableCell align="left">{dataRow.transactions[0].recurring}</TableCell>
                         </TableRow>
