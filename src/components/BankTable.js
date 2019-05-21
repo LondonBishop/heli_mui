@@ -18,49 +18,15 @@ const styles = {
   },
 };
 
-// let id = 0;
-// function createData(name, calories, fat, carbs, protein) {
-//   id += 1;
-//   return { id, name, calories, fat, carbs, protein };
-// }
-
-// const data = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-
-// function GetCreditDebit (transIndicator, amount) {
-
-//   if (transIndicator === "credit") {
-//     return (<a><TableCell align="right">{amount}</TableCell>
-//                  <TableCell align="right"></TableCell>   </a>
-//             )
-//   }
-
-//   if (transIndicator === "credit") {
-//     return (<a><TableCell align="right">{amount}</TableCell>
-//                  <TableCell align="right"></TableCell>   
-//             </a> )
-//   } else {
-//     return (<div><TableCell align="right"></TableCell>
-//              <TableCell align="right">{amount}</TableCell> 
-//             </div> )
-//   }
-
-// }
-
-
 class BankTable extends Component {
   
   render () {
       
-    const { classes, inBoundData } = this.props;
+    const { classes, account } = this.props;
 
     return (
           <Paper className={classes.root}>
+        
             <Table className={classes.table}>
              
               <TableHead>
@@ -69,20 +35,22 @@ class BankTable extends Component {
                   <TableCell align="right">Description</TableCell>
                   <TableCell align="right">Credit</TableCell>
                   <TableCell align="right">Debit</TableCell>
-                  <TableCell align="right">Balance</TableCell>
+                  <TableCell align="right" style={ { fontWeight:"bold" } }>Balance</TableCell>
                 </TableRow>
               </TableHead>
 
               <TableBody>
-                { inBoundData[0].transactions.map( dataRow => (
+                { account ? 
+                 account.transactions.map( dataRow => (
                         <TableRow>
-                          <TableCell component="th" scope="row">x</TableCell>
-                          <TableCell align="right">0</TableCell>
-                          <TableCell align="right">0</TableCell>
-                          <TableCell align="right">0</TableCell>
-                          <TableCell align="right">0</TableCell>
+                          <TableCell component="th" scope="row">{dataRow.date}</TableCell>
+                          <TableCell align="left">{dataRow.trans_desc}</TableCell>
+                          {dataRow.transtype === "credit" ? <TableCell align="right">{dataRow.amount}</TableCell> : <TableCell align="right"></TableCell>}
+                          {dataRow.transtype === "debit" ? <TableCell align="right">{dataRow.amount}</TableCell> : <TableCell align="right"></TableCell>}
+                          <TableCell align="right" style={ { fontWeight:"bold" } }>{dataRow.balance}</TableCell>
                         </TableRow>
-                ))}
+                )) : null
+                }
               </TableBody>
 
             </Table>

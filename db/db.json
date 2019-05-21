@@ -12,25 +12,29 @@
                 "transtype" : "debit",  
                 "date" : "13/04/2019",
                 "trans_desc" : "Pret Coffee",
-                "amount" : -2.75
+                "amount" : -2.75,
+                "balance" : 478.66
               },
               {
               "transtype" : "credit",  
               "date" : "12/04/2019",
               "trans_desc" : "Interest",
-              "amount" : 1.06
+              "amount" : 1.06,
+              "balance" : 481.41
             },
             {
               "transtype" : "debit",  
               "date" : "12/04/2019",
               "trans_desc" : "Virgin Media",
-              "amount" : -59.99
+              "amount" : -59.99,
+              "balance" : 480.35
             },
             {
               "transtype" : "debit",  
               "date" : "11/04/2019",
               "trans_desc" : "Legal & General",
-              "amount" : 459.66
+              "amount" : -459.66,
+              "balance" : 540.34
             }   
       ]
     }, 
@@ -46,25 +50,28 @@
                         "transtype" : "credit",  
                         "date" : "13/04/2019",
                         "trans_desc" : "PND Salary",
-                        "amount" : 1233.01
+                        "amount" : 1233.01,
+                        "balance" : 2828.01
                       },
                       {
                       "transtype" : "credit",  
                       "date" : "12/04/2019",
                       "trans_desc" : "Barclays TFR",
-                      "amount" : 600.00
+                      "amount" : 600.00,
+                      "balance" : 1595.01
                     },
                     {
                       "transtype" : "debit",  
                       "date" : "12/04/2019",
                       "trans_desc" : "Spotify Inc.",
-                      "amount" : -4.99
+                      "amount" : -4.99,
+                      "balance" : 995.01
                     }
         ]
     },
     {
       "id" : 3,
-      "entity" : "credit card",
+      "entity" : "creditcard",
       "account_desc" : "Virgin money",
       "sortcode" : "",
       "account" : "465912118097",
@@ -102,7 +109,7 @@
               {
                 "duedate" : "21/04/2019",
                 "paidfrom" : 2,
-                "amount": -69.22,
+                "amount": "-69.22",
                 "recurring" : "month"  
               }
       ]
@@ -119,7 +126,7 @@
                 "duedate" : "19/04/2019",
                 "bill_desc" : "CoffeeClub",
                 "paidfrom" : 3,
-                "amount": -19.22,
+                "amount": "-19.22",
                 "recurring" : "week"    
               }
       ]
@@ -135,7 +142,7 @@
               {
                 "duedate" : "20/04/2019",
                 "paidfrom" : 2,
-                "amount": -24.00,
+                "amount": "-24.99",
                 "recurring" : "month"   
               }
       ]
@@ -152,7 +159,7 @@
                 "duedate" : "21/04/2019",
                 "bill_desc" : "Car Insurance",
                 "paidfrom" : 3,
-                "amount": -111.00,
+                "amount": "-111.00",
                 "recurring" : "21/04"   
               }
       ]

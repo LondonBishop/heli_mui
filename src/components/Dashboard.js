@@ -21,6 +21,7 @@ import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
 // import { switchCase } from '@babel/types';
 import BankAccountContainer from '../containers/BankAccountContainer' 
+import BillsContainer from '../containers/BillsContainer'
 
 const drawerWidth = 240;
 
@@ -131,8 +132,8 @@ class Dashboard extends React.Component {
   loadMasterData (userData) {
 
     let bankData = userData.filter( dataElement => dataElement.entity === "bank");
-    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcards");
-    let billsData = userData.filter( dataElement => dataElement.entity === "bills");
+    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcard");
+    let billsData = userData.filter( dataElement => dataElement.entity === "bill");
 
     this.setState ( { 
       userData : userData,
@@ -156,9 +157,7 @@ class Dashboard extends React.Component {
   };
 
   handleSideBarClick = (event, selection) => {
-
     event.preventDefault();
-
     this.setState({ 
       topPage : selection,
     });
@@ -171,11 +170,19 @@ class Dashboard extends React.Component {
       switch (this.state.topPage) {
         case "accounts":
           // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
-          console.log (" Dashboard " + this.state.bankAccounts )
-          return <BankAccountContainer inBoundData={ this.state.bankAccounts } />
+          return <BankAccountContainer BankAccounts={ this.state.bankAccounts } />
           break;
         
-        case "creditcards" :
+        case "creditcards":
+          // return <BankAccountContainer BankAccounts={ this.state.creditCards } />
+          break;
+
+
+        case "bills" :
+          return <BillsContainer Bills={ this.state.bills } />
+          break;
+
+        case "helicopter" :
           break;
 
         default:
@@ -254,23 +261,8 @@ class Dashboard extends React.Component {
 
               {/* top Page */}
               {this.switchTopPage(classes)}
-              
-          
 
               {/* //bottom Page  */}
-              {/* <Typography variant="h4" gutterBottom component="h2">
-                Orders
-              </Typography> */}
-
-              {/* <Typography component="div" className={classes.chartContainer}>
-                <SimpleLineChart />
-              </Typography> */}
-
-              {/* <Typography variant="h4" gutterBottom component="h2">
-                Products
-              </Typography> */}
-
-             
 
         </main>
 

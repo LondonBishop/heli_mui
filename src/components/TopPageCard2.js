@@ -27,7 +27,7 @@ export default class TopPageCard2 extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleSelectCard(e) } } >
+                        <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleSelectCard(e, account) } } >
                                 Select
                         </Button>
                         <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleEditCard(e) } } >

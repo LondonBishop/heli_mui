@@ -20,16 +20,40 @@ class BankAccountContainer extends Component {
 
 
   constructor (props) {
-    super(props);
+        super(props);
 
-    let intialBankTransactions = props.inBoundData[0].transactions
-
-    this.state ={
-      selectedBankId: props.inBoundData[0].id,
-      selectedBankTransactions : intialBankTransactions,  
-      };
+        this.state ={
+            selectedAccount : "",
+        };
     }
 
+    setDefaultAccount = () => {
+      if (this.props.BankAccounts) {
+        this.setState({
+          selectedAccount : this.props.BankAccounts[0]
+        })
+      }
+    }
+
+    componentDidMount () {
+    
+    }
+
+    static getDerivedStateFromProps(props, state){
+      
+        if (props.BankAccounts[0] !== state.selectedAccount) {
+          return {selectedAccount: state.selectedAccount }
+        } else return null
+      
+    }
+  
+    
+    // static getDerivedStateFromProps(props, state) {
+    //   return {
+    //     state.selectedBankId: props.inBoundData[0].id,
+    //     state.selectedBankTransactions : props.inBoundData[0].transactions,  
+    //   }
+    // }
 
 
 // EVENT handlers **************************************************
@@ -39,61 +63,65 @@ class BankAccountContainer extends Component {
         console.log ("event ---> edit card")
       }
 
-      handleSelectCard = (event) => {
+      handleSelectCard = (event, account) => {
+        
         event.preventDefault();
         console.log ("event ---> select card")
-        this.switchBottomPageView();
+
+
+        this.setState ( { 
+          selectedAccount : account
+         });
       }
+
 
       switchBottomPageView = () => {
       }
 
-      componentDidMount () {
-      }
 
-      setInitialView (props) {
       
-            let intialBankTransactions = props.inBoundData[0].transactions
-
-            this.setState ( { 
-                selectedBankId : props.inBoundData[0].id,
-                selectedBankTransactions : intialBankTransactions,
-            });
-        
-            return ( <div className={ this.classes.tableContainer}>
-              <BankTable inBoundData={ this.state.selectedBankTransactions } />
-            </div>)
-      }
 
 
 // * CLASS ****************************************************************** 
 
       render() {
 
-        const { classes, inBoundData } = this.props
+        const { classes, BankAccounts } = this.props
         
         console.log ("Bank Account Container ")
-
-        let temp = inBoundData[0] ? ( this.setInitialView() ) : null
         
         return (
 
           <div className={classes.root}>
               <div className={classes.gridList}>
-                  <BankAccountTop inBoundData ={ inBoundData }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+                  <BankAccountTop BankAccounts ={ BankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
               </div>
               <div className={classes.appBarSpacer} />
+              {/* <BottomData firstTimeInFlag={firstTimeInFlag} /> */}
+             
+              {/* {  !inBoundData[0] && this.state.selectedBankId ? 
+                  null
+                  : 
+                  <div className={classes.tableContainer}>
+                      <BankTable inBoundData={ inBoundData[0].transactions } />
+                  </div>
+              } */}
+
               {/* { 
                 inBoundData[0]
                 ? 
                 <div className={classes.tableContainer}>
-                  <BankTable inBoundData={ inBoundData } />
+                  <BankTable inBoundData={ inBoundData[0].transactions } />
                 </div>
                 : null
-              } */}
-                
-                <BankTable inBoundData={ this.state.selectedBankTransactions } />
-              
+              }
+                //  */}
+        
+                {/* <BankTable inBoundData={ this.state.account } /> */}
+            { this.state.selectedAccount ?
+                 <BankTable account={ this.state.selectedAccount } />:
+                 <BankTable account={""}/>} 
+              {/* {<BankTable inBoundData={ this.state.account } />} */}
           </div>
         );
       }
