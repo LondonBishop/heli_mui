@@ -113,7 +113,7 @@ class Dashboard extends React.Component {
     bankAccounts  : [],
     creditCards : [],
     bills : [],
-    topPage : "accounts",
+    topPage : "creditcards",
     bottomPage : null,
   };
 
@@ -195,7 +195,7 @@ class Dashboard extends React.Component {
 
         case "heli" :
          
-          return <HeliContainer objNetWorth={this.objNetWorth} />
+          return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
           break;
 
         default:
@@ -254,7 +254,6 @@ class Dashboard extends React.Component {
 
     objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
    
-    debugger
   }
 
 

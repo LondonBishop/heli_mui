@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import HeliTable from '../components/HeliTable';
 
 
 
@@ -16,18 +17,21 @@ class HeliContainer extends Component {
     return (
             <div>
                 <Paper className={classes.root} elevation={1}>
+                    <HeliTable accounts={this.props.bankAccounts} />
+
                     <Divider variant="middle" style={ { marginTop: 35 } }/>
                     <Typography variant="h5" component="h3">
                         Your total bills : £ { this.props.objNetWorth.totalBills }
-                    </Typography>
-                    <Divider variant="middle" style={ { marginBottom: 15 } }/>
-                    <Typography variant="h5" component="h3">
-                        Your net worth (inc bills to pay) : £ { this.props.objNetWorth.totalNetWorthWithBills }
                     </Typography>
                     <Divider variant="middle" style={ { marginTop: 15 } }/>
                     <Typography variant="h5" component="h3">
                         Your net worth : £ { this.props.objNetWorth.totalNetWorthWithOutBills }
                     </Typography>
+                    <Divider variant="middle" style={ { marginBottom: 15 } }/>
+                    <Typography variant="h5" component="h3">
+                        Your net worth (inc bills and credit cards) : £ { this.props.objNetWorth.totalNetWorthWithBills }
+                    </Typography>
+                   
                     <Divider variant="middle" style={ { marginTop: 15 } }/>
                 </Paper>
             </div>
