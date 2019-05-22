@@ -19,20 +19,20 @@ class HeliContainer extends Component {
                 <Paper className={classes.root} elevation={1}>
                     <HeliTable accounts={this.props.bankAccounts} />
 
-                    <Divider variant="middle" style={ { marginTop: 35 } }/>
-                    <Typography variant="h5" component="h3">
+                    <Divider variant="middle" style={ { margin: 25 } }/>
+                    <Typography variant="h7" component="h3">
                         Your total bills : £ { this.props.objNetWorth.totalBills }
                     </Typography>
-                    <Divider variant="middle" style={ { marginTop: 15 } }/>
-                    <Typography variant="h5" component="h3">
+                    <Divider variant="middle" style={ { margin: 15 } }/>
+                    <Typography variant="h7" component="h3">
                         Your net worth : £ { this.props.objNetWorth.totalNetWorthWithOutBills }
                     </Typography>
-                    <Divider variant="middle" style={ { marginBottom: 15 } }/>
-                    <Typography variant="h5" component="h3">
+                    <Divider variant="middle" style={ { margin: 15 } }/>
+                    <Typography variant="h7" component="h3">
                         Your net worth (inc bills and credit cards) : £ { this.props.objNetWorth.totalNetWorthWithBills }
                     </Typography>
                    
-                    <Divider variant="middle" style={ { marginTop: 15 } }/>
+                    <Divider variant="middle" style={ { margin: 15 } }/>
                 </Paper>
             </div>
          );

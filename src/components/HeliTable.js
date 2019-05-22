@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Image } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -7,6 +7,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Icon from '@material-ui/core/Icon'
+import AssignmentReturned from '@material-ui/icons/AssignmentReturned';
+import TrendingDownOutlined from '@material-ui/icons/TrendingDownOutlined'
+import TrendingUpOutlined from '@material-ui/icons/TrendingUpOutlined'
+import Mood from '@material-ui/icons/Mood';
+import SentimentDissatisfiedRounded from '@material-ui/icons/SentimentDissatisfiedRounded'
+
 
 const styles = {
   root: {
@@ -43,9 +50,8 @@ class HeliTable extends Component {
                         <TableRow>
                           <TableCell component="th" scope="row">{dataRow.account_desc}</TableCell>
                           <TableCell align="right" style={ { fontWeight:"bold" } }>{dataRow.transactions[0].balance}</TableCell>
-                          <TableCell align="right" style={ { fontWeight:"bold" } }>{dataRow.balanceIndicator}</TableCell>
-                          {/* {dataRow.transtype === "up" ? <TableCell align="right"></TableCell> : <TableCell align="right"></TableCell>}
-                          {dataRow.transtype === "down" ? <TableCell align="right">{dataRow.amount}</TableCell> : <TableCell align="right"></TableCell>} */}
+                          {dataRow.balanceIndicator === "up" ? <TableCell align="right"><Icon><Mood/><TrendingUpOutlined/></Icon></TableCell> : null}
+                          {dataRow.balanceIndicator === "down" ? <TableCell align="right"><Icon><SentimentDissatisfiedRounded /><TrendingDownOutlined /></Icon></TableCell> : null}
                         </TableRow>
                 )) : null
                 }

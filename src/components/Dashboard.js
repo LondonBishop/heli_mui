@@ -193,6 +193,9 @@ class Dashboard extends React.Component {
           return <BillsContainer Bills={ this.state.bills } TotalBills={ this.objNetWorth.totalBills } />
           break;
 
+        case "invest" :
+          break;
+
         case "heli" :
          
           return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
