@@ -39,11 +39,11 @@ import Tram from '@material-ui/icons/Tram'
                 </ListItemIcon>
                 <ListItemText primary="Bills" />
               </ListItem>
-              <ListItem button onClick={ (e) => { handleSideBarClick(e, "gov") } }>
+              <ListItem button onClick={ (e) => { handleSideBarClick(e, "invest") } }>
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
-                <ListItemText primary="GOV" />
+                <ListItemText primary="Investment Portfolio" />
               </ListItem>
               <ListItem button onClick={ (e) => { handleSideBarClick(e, "heli") } }>
                 <ListItemIcon>
