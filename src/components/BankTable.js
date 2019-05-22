@@ -32,7 +32,7 @@ class BankTable extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell>Date</TableCell>
-                  <TableCell align="right">Description</TableCell>
+                  <TableCell align="left">Description</TableCell>
                   <TableCell align="right">Credit</TableCell>
                   <TableCell align="right">Debit</TableCell>
                   <TableCell align="right" style={ { fontWeight:"bold" } }>Balance</TableCell>

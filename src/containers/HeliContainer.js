@@ -12,7 +12,7 @@ class HeliContainer extends Component {
    
   render () {  
 
-    const { classes } = this.props;
+    const { classes,  } = this.props;
 
     return (
             <div>
@@ -20,19 +20,22 @@ class HeliContainer extends Component {
                     <HeliTable accounts={this.props.bankAccounts} />
 
                     <Divider variant="middle" style={ { margin: 25 } }/>
-                    <Typography variant="h7" component="h3">
-                        Your total bills : £ { this.props.objNetWorth.totalBills }
+                    <Typography variant="h7" component="h3" >
+                        Your total bills : £ { this.props.objNetWorth.totalBills +  this.props.objNetWorth.totalCreditCards}
                     </Typography>
                     <Divider variant="middle" style={ { margin: 15 } }/>
                     <Typography variant="h7" component="h3">
                         Your net worth : £ { this.props.objNetWorth.totalNetWorthWithOutBills }
                     </Typography>
-                    <Divider variant="middle" style={ { margin: 15 } }/>
+                    <Divider variant="middle" style={ { margin: 15, backgroundColor:"orange"} }/>
                     <Typography variant="h7" component="h3">
-                        Your net worth (inc bills and credit cards) : £ { this.props.objNetWorth.totalNetWorthWithBills }
+                        Your Net Worth (inc bills and credit cards) : £ { 
+                          (this.props.objNetWorth.totalNetWorthWithOutBills + 
+                           this.props.objNetWorth.totalBills + 
+                           this.props.objNetWorth.totalCreditCards).toFixed(2) }
                     </Typography>
                    
-                    <Divider variant="middle" style={ { margin: 15 } }/>
+                    <Divider variant="middle"  style={ { margin: 15, backgroundColor:"orange"} }/>
                 </Paper>
             </div>
          );

@@ -12,8 +12,8 @@ export default class BillsContainer extends Component {
     
     render () {
 
-        const { Bills, TotalBills } = this.props
-
+        const { bills, creditCards, objNetWorth } = this.props
+     
         return (
             <div>
                 <BillSelectorContainer  />
@@ -21,9 +21,9 @@ export default class BillsContainer extends Component {
                 <Typography variant="h6" gutterBottom component="h2">
                     Payments coming up...
                 </Typography>
-                <BillsTable Bills= { Bills } />
+                <BillsTable bills= { bills } creditCards={ creditCards } />
                 <Divider variant="middle" style={ { marginTop: 15 } }/>
-                <BillTotal TotalBills={ TotalBills } />
+                <BillTotal totalBills={ objNetWorth.totalBills + objNetWorth.totalCreditCards } />
             </div>
         );
     }

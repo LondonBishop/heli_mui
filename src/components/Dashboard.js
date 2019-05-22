@@ -119,7 +119,7 @@ class Dashboard extends React.Component {
 
   objNetWorth = {
     totalBills : 0,
-    totalNetWorthWithBills : 0,
+    totalCreditCards: 0,
     totalNetWorthWithOutBills : 0,
   }
 
@@ -190,14 +190,13 @@ class Dashboard extends React.Component {
 
 
         case "bills" :
-          return <BillsContainer Bills={ this.state.bills } TotalBills={ this.objNetWorth.totalBills } />
+          return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
           break;
 
         case "invest" :
           break;
 
         case "heli" :
-         
           return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
           break;
 
@@ -207,13 +206,8 @@ class Dashboard extends React.Component {
   }
 
 
-  calculateNetBalance = (account) => {
-    // let calculatedNetBalance = (account.transactions[account.transactions.length -1].balance -  account.transactions[0].balance).toFixed(2);
-    // if (calculatedNetBalance === 0) {
-    //   calculatedNetBalance = account.transactions[0].balance
-    // }
-    // account.calculatedNetBalance = calculatedNetBalance
-
+  calculateBalanceIndicator = (account) => {
+  
       if (account.transactions[0].balance !== 0) {
         if (account.transactions[account.transactions.length -1].balance > account.transactions[0].balance ) {
             account.balanceIndicator = "down"
@@ -230,32 +224,27 @@ class Dashboard extends React.Component {
 
     const { bankAccounts, creditCards, bills } = this.state;
 
-    let totalNetWorthWithOutBills = 0;
-    let totalBillsAndCC = 0;
-
     //calculate bank indicators
-    bankAccounts.map ( (account) => { this.calculateNetBalance(account) });  
+    bankAccounts.map ( (account) => { this.calculateBalanceIndicator(account) });  
 
+    // bank accounts 
     bankAccounts.forEach( bank => {
-      totalNetWorthWithOutBills += bank.transactions[0].balance;
+      objNetWorth.totalNetWorthWithOutBills += bank.transactions[0].balance;
     })
     
-    //credit cards
-    creditCards.forEach ( creditcard => { 
-      totalBillsAndCC += creditcard.balance; 
-      totalNetWorthWithOutBills += creditcard.balance; 
+     //credit cards
+    creditCards.forEach (creditCard => {
+      objNetWorth.totalCreditCards += Number(creditCard.transactions[0].balance) * -1;
     });
 
     //bills
     bills.forEach (bill => { 
-      totalBillsAndCC += Number(bill.transactions[0].amount);
-      
+      objNetWorth.totalBills += Number(bill.transactions[0].amount);
     });
 
-    objNetWorth.totalBills = totalBillsAndCC.toFixed(2);
-    objNetWorth.totalNetWorthWithOutBills = totalNetWorthWithOutBills.toFixed(2); 
-
-    objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
+    // objNetWorth.totalBills = totalBillsAndCC.toFixed(2);
+    // objNetWorth.totalNetWorthWithOutBills = totalNetWorthWithOutBills.toFixed(2); 
+    // objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
    
   }
 

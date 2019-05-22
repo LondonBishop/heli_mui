@@ -13,17 +13,14 @@ const styles = theme => ({
 });
 
 function BillsTotal(props) {
-  const { classes, TotalBills } = props;
+  const { classes, totalBills } = props;
 
   return (
     <div>
-      <Paper className={classes.root} elevation={1} style={{ backgroundColor : "lightblue" }}>
+      <Paper className={classes.root} elevation={1} style={{ backgroundColor : "orange" }}>
         <Typography variant="h5" component="h3">
-          You will need a total of £ { TotalBills }
+          You will need a total of  £{ totalBills * -1 }
         </Typography>
-        {/* <Typography component="p">
-          Paper can be used to build surface or other elements for your application.
-        </Typography> */}
       </Paper>
     </div>
   );
