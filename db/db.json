@@ -6,7 +6,6 @@
     "account_desc" : "Barclays",
     "sortcode" : "20-90-56",
     "accountnumber" : "2341893",
-    "balance" : 2650.39,
     "transactions" : [
               {
                 "transtype" : "debit",  
@@ -44,7 +43,6 @@
       "account_desc" : "Santander",
       "sortcode" : "11-62-45",
       "account" : "4621911",
-      "balance" : 798.11,
       "transactions" : [
                       {
                         "transtype" : "credit",  
@@ -75,25 +73,28 @@
       "account_desc" : "Virgin money",
       "sortcode" : "",
       "account" : "465912118097",
-      "balance" : -598.23,
+      "duedate" : "31/05/2019" ,
       "transactions" : [
                       {
                         "transtype" : "debit",  
                         "date" : "13/04/2019",
                         "trans_desc" : "TFL",
-                        "amount" : 8.00
+                        "amount" : "-8.00",
+                        "balance" : "98.64"
                       },
                       {
                       "transtype" : "debit",  
                       "date" : "12/04/2019",
                       "trans_desc" : "Pizza Express",
-                      "amount" : 62.50
+                      "amount" : "-77.65",
+                      "balance" : "90.64"
                     },
                     {
                       "transtype" : "debit",  
                       "date" : "11/04/2019",
                       "trans_desc" : "Udemy Inc",
-                      "amount" : -12.99
+                      "amount" : "-12.99",
+                      "balance" : "12.99"
                     }
               
         ]
@@ -104,7 +105,6 @@
       "account_desc" : "Gas",
       "sortcode" : "",
       "account" : "465912118097",
-      "balance" : -598.23,
       "transactions" : [
               {
                 "duedate" : "21/04/2019",
@@ -120,7 +120,6 @@
       "account_desc" : "CoffeeClub",
       "sortcode" : "",
       "account" : "465912118097",
-      "balance" : -19.22,
       "transactions" : [
               {
                 "duedate" : "19/04/2019",
@@ -137,7 +136,6 @@
       "account_desc" : "TV Licence",
       "sortcode" : "",
       "account" : "465912118097",
-      "balance" : -19.22,
       "transactions" : [
               {
                 "duedate" : "20/04/2019",
@@ -153,16 +151,46 @@
       "account_desc" : "Car Insurance",
       "sortcode" : "",
       "account" : "465912118097",
-      "balance" : -19.22,
       "transactions" : [
               {
                 "duedate" : "21/04/2019",
-                "bill_desc" : "Car Insurance",
                 "paidfrom" : 3,
                 "amount": "-111.00",
                 "recurring" : "21/04"   
               }
       ]
+    },
+    {
+      "id" : 8,
+      "entity" : "creditcard",
+      "account_desc" : "MBNA",
+      "sortcode" : "",
+      "account" : "465912554433",
+      "duedate" : "25/08/2019" ,
+      "transactions" : [
+                      {
+                        "transtype" : "debit",  
+                        "date" : "13/04/2019",
+                        "trans_desc" : "HM Fashions",
+                        "amount" : "-45.00",
+                        "balance" : "808.75"
+                      },
+                      {
+                      "transtype" : "debit",  
+                      "date" : "12/04/2019",
+                      "trans_desc" : "Hugo Boss",
+                      "amount" : "-686.75",
+                      "balance" : "763.75"
+                    },
+                    {
+                      "transtype" : "debit",  
+                      "date" : "11/04/2019",
+                      "trans_desc" : "FootLocker",
+                      "amount" : "-77.00",
+                      "balance" : "77.00"
+                    }
+              
+        ]
     }
   ]
 }

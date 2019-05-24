@@ -20,8 +20,9 @@ import SimpleTable from './SimpleTable';
 import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
 // import { switchCase } from '@babel/types';
-import BankAccountContainer from '../containers/BankAccountContainer' 
-import BillsContainer from '../containers/BillsContainer'
+import BankAccountContainer from '../containers/BankAccountContainer'; 
+import BillsContainer from '../containers/BillsContainer';
+import HeliContainer from '../containers/HeliContainer';
 
 const drawerWidth = 240;
 
@@ -103,19 +104,24 @@ const styles = theme => ({
   },
 });
 
+
 class Dashboard extends React.Component {
  
   state = {
     open: true,
     userData : [],
     bankAccounts  : [],
-    creditcards : [],
+    creditCards : [],
     bills : [],
-    netWorthWithBills: [],
-    netWorthWithOutBills : [],
-    topPage : "accounts",
+    topPage : "creditcards",
     bottomPage : null,
   };
+
+  objNetWorth = {
+    totalBills : 0,
+    totalCreditCards: 0,
+    totalNetWorthWithOutBills : 0,
+  }
 
   componentDidMount () {
     fetch ("http://localhost:3000/user", 
@@ -128,22 +134,6 @@ class Dashboard extends React.Component {
     ).then ( resp => resp.json() )
     .then (data => this.loadMasterData(data) );
            
-  }
-
-
-  loadMasterData (userData) {
-
-    let bankData = userData.filter( dataElement => dataElement.entity === "bank");
-    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcard");
-    let billsData = userData.filter( dataElement => dataElement.entity === "bill");
-
-    this.setState ( { 
-      userData : userData,
-      bankAccounts : bankData,
-      creditCards : creditCardsData,
-      bills : billsData,
-  })
-
   }
 
 
@@ -165,7 +155,26 @@ class Dashboard extends React.Component {
     });
   }
  
-// methods *********************************************
+// ***** methods **********************************************************
+
+  loadMasterData (userData) {
+
+    let bankData = userData.filter( dataElement => dataElement.entity === "bank");
+    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcard");
+    let billsData = userData.filter( dataElement => dataElement.entity === "bill");
+
+    this.setState ( { 
+      userData : userData,
+      bankAccounts : bankData,
+      creditCards : creditCardsData,
+      bills : billsData,
+    })
+
+    // calculate Net Worth for later.
+    this.calculateNetWorth(this.objNetWorth);
+
+  }
+
 
   switchTopPage  = () => {
 
@@ -181,10 +190,14 @@ class Dashboard extends React.Component {
 
 
         case "bills" :
-          return <BillsContainer Bills={ this.state.bills } />
+          return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
           break;
 
-        case "helicopter" :
+        case "invest" :
+          break;
+
+        case "heli" :
+          return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
           break;
 
         default:
@@ -193,10 +206,49 @@ class Dashboard extends React.Component {
   }
 
 
-  calculateNetWorth = () => {
-    
-
+  calculateBalanceIndicator = (account) => {
+  
+      if (account.transactions[0].balance !== 0) {
+        if (account.transactions[account.transactions.length -1].balance > account.transactions[0].balance ) {
+            account.balanceIndicator = "down"
+        } else {
+            account.balanceIndicator = "up"
+        }
+      } else {
+        account.balanceIndicator = "neutral";
+      } 
   }
+
+
+  calculateNetWorth = (objNetWorth) => {
+
+    const { bankAccounts, creditCards, bills } = this.state;
+
+    //calculate bank indicators
+    bankAccounts.map ( (account) => { this.calculateBalanceIndicator(account) });  
+
+    // bank accounts 
+    bankAccounts.forEach( bank => {
+      objNetWorth.totalNetWorthWithOutBills += bank.transactions[0].balance;
+    })
+    
+     //credit cards
+    creditCards.forEach (creditCard => {
+      objNetWorth.totalCreditCards += Number(creditCard.transactions[0].balance) * -1;
+    });
+
+    //bills
+    bills.forEach (bill => { 
+      objNetWorth.totalBills += Number(bill.transactions[0].amount);
+    });
+
+    // objNetWorth.totalBills = totalBillsAndCC.toFixed(2);
+    // objNetWorth.totalNetWorthWithOutBills = totalNetWorthWithOutBills.toFixed(2); 
+    // objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
+   
+  }
+
+
 
 
   // **************************************************
@@ -205,6 +257,8 @@ class Dashboard extends React.Component {
   render() {
 
     const { classes } = this.props;
+
+    
 
     return (
 
