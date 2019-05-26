@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-// import tileData from './tileData';
-import TopPageCard2 from '../components/TopPageCard2'
 import BankAccountTop from '../components/BankAccountTop'
-import SimpleTable from '../components/SimpleTable'
 import BankTable from '../components/BankTable'
 import Divider from '@material-ui/core/Divider';
-
-
-// const tileData =[ {name: "Barclays", balance : "2,650.44"}, {name : "Citi", balance: "12.99"}, {name : "Halifax Saver", balance: "36,500.99"}]
 
 class BankAccountContainer extends Component {
 
@@ -29,33 +17,23 @@ class BankAccountContainer extends Component {
     }
 
     setDefaultAccount = () => {
-      if (this.props.BankAccounts) {
+      if (this.props.bankAccounts) {
         this.setState({
-          selectedAccount : this.props.BankAccounts[0]
+          selectedAccount : this.props.bankAccounts[0]
         })
       }
     }
 
-    componentDidMount () {
-    
-    }
 
     static getDerivedStateFromProps(props, state){
       
-        if (props.BankAccounts[0] !== state.selectedAccount) {
+        if (props.bankAccounts[0] !== state.selectedAccount) {
           return {selectedAccount: state.selectedAccount }
         } else return null
       
     }
   
     
-    // static getDerivedStateFromProps(props, state) {
-    //   return {
-    //     state.selectedBankId: props.inBoundData[0].id,
-    //     state.selectedBankTransactions : props.inBoundData[0].transactions,  
-    //   }
-    // }
-
 
 // EVENT handlers **************************************************
 
@@ -87,15 +65,14 @@ class BankAccountContainer extends Component {
 
       render() {
 
-        const { classes, BankAccounts } = this.props
-        
-        console.log ("Bank Account Container ")
+        const { classes, bankAccounts } = this.props
+      
         
         return (
 
           <div className={classes.root}>
               <div className={classes.gridList}>
-                  <BankAccountTop BankAccounts ={ BankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+                  <BankAccountTop BankAccounts ={ bankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
               </div>
               <Divider variant="middle" style={ { marginTop : 45 } }/>
               {/* <BottomData firstTimeInFlag={firstTimeInFlag} /> */}
@@ -120,9 +97,8 @@ class BankAccountContainer extends Component {
         
                 {/* <BankTable inBoundData={ this.state.account } /> */}
             { this.state.selectedAccount ?
-                 <BankTable account={ this.state.selectedAccount } />: null }
-                  {/* <BankTable account={""}/>}  */}
-              {/* {<BankTable inBoundData={ this.state.account } />} */}
+                 <BankTable account={ this.state.selectedAccount } />
+                 : null }
           </div>
         );
       }

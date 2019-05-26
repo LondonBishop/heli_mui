@@ -12,7 +12,8 @@ import AssignmentReturned from '@material-ui/icons/AssignmentReturned';
 import TrendingDownOutlined from '@material-ui/icons/TrendingDownOutlined'
 import TrendingUpOutlined from '@material-ui/icons/TrendingUpOutlined'
 import Mood from '@material-ui/icons/Mood';
-import SentimentDissatisfiedRounded from '@material-ui/icons/SentimentDissatisfiedRounded'
+import SentimentDissatisfiedRounded from '@material-ui/icons/SentimentDissatisfiedRounded';
+import Format from '../components/Format';
 
 
 const styles = {
@@ -49,7 +50,7 @@ class HeliTable extends Component {
                  accounts.map( dataRow => (
                         <TableRow>
                           <TableCell component="th" scope="row">{dataRow.account_desc}</TableCell>
-                          <TableCell align="right" style={ { fontWeight:"bold" } }>{dataRow.transactions[0].balance}</TableCell>
+                          <TableCell align="right" style={ { fontWeight:"bold" } }>{Format.formatMoneyNoSymbol(dataRow.accountlines[0].balance)}</TableCell>
                           {dataRow.balanceIndicator === "up" ? <TableCell align="right"><Icon><Mood/><TrendingUpOutlined/></Icon></TableCell> : null}
                           {dataRow.balanceIndicator === "down" ? <TableCell align="right"><Icon><SentimentDissatisfiedRounded /><TrendingDownOutlined /></Icon></TableCell> : null}
                         </TableRow>

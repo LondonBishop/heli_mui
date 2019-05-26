@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Format from '../components/Format';
 
 const styles = {
   root: {
@@ -26,18 +27,19 @@ class BillsTable extends Component {
   
   combineData = (bills, creditcards) => {
 
+
       let newData1 = bills.map ( bill => (
           { r1: bill.account_desc, 
-            r2: bill.transactions[0].duedate, 
-            r3: (bill.transactions[0].amount * -1).toFixed(2),
-            r4: bill.transactions[0].recurring
+            r2: Format.formatDate(bill.duedate), 
+            r3: Format.formatMoneyNoSymbol((bill.accountlines[0].amount * -1).toFixed(2)),
+            r4: bill.recurring
           }
       ))
 
       let newData2 = creditcards.map ( cc => (
         { r1: cc.account_desc, 
           r2: cc.duedate, 
-          r3: cc.transactions[0].balance,
+          r3: Format.formatMoneyNoSymbol(cc.accountlines[0].balance),
           r4: ""
         }
     ))
@@ -59,7 +61,7 @@ class BillsTable extends Component {
                 <TableRow>
                   <TableCell align="left">Company</TableCell>
                   <TableCell>Due Date</TableCell>
-                  <TableCell align="left" style={ { fontWeight:"bold" } }>Amount</TableCell>
+                  <TableCell align="right" style={ { fontWeight:"bold" } }>Amount</TableCell>
                   <TableCell align="left">How Often?</TableCell>
                 </TableRow>
               </TableHead>
@@ -69,30 +71,11 @@ class BillsTable extends Component {
                     <TableRow>
                       <TableCell component="th" scope="row" align="left">{dataRow.r1}</TableCell>
                       <TableCell align="left">{dataRow.r2}</TableCell>
-                      <TableCell align="left">{dataRow.r3}</TableCell>
+                      <TableCell align="right">{dataRow.r3}</TableCell>
                       <TableCell align="left">{dataRow.r4}</TableCell>
                   </TableRow> ))
                 }
-                {/* { bills ? 
-                 bills.map( dataRow => (
-                        <TableRow>
-                          <TableCell component="th" scope="row" align="left">{dataRow.account_desc}</TableCell>
-                          <TableCell align="left">{dataRow.transactions[0].duedate}</TableCell>
-                          <TableCell align="left">{dataRow.transactions[0].amount}</TableCell>
-                          <TableCell align="left">{dataRow.transactions[0].recurring}</TableCell>
-                        </TableRow>
-                )) : null }
-                {
-                 creditCards ?
-                    creditCards.map ( creditCard => (
-                      <TableRow>
-                      <TableCell component="th" scope="row" align="left">{creditCard.account_desc}</TableCell>
-                      <TableCell align="left">{creditCard.duedate}</TableCell>
-                      <TableCell align="left">{creditCard.transactions[0].balance}</TableCell>
-                      <TableCell align="left">""</TableCell>
-                    </TableRow>
-                    )) : null
-                } */}
+  
               </TableBody>
 
             </Table>

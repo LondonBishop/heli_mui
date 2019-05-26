@@ -7,6 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Format from '../components/Format';
+
 
 const styles = {
   root: {
@@ -41,13 +43,13 @@ class BankTable extends Component {
 
               <TableBody>
                 { account ? 
-                 account.transactions.map( dataRow => (
+                 account.accountlines.map( dataRow => (
                         <TableRow>
-                          <TableCell component="th" scope="row">{dataRow.date}</TableCell>
+                          <TableCell component="th" scope="row">{Format.formatDate(dataRow.date)}</TableCell>
                           <TableCell align="left">{dataRow.trans_desc}</TableCell>
-                          {dataRow.transtype === "credit" ? <TableCell align="right">{dataRow.amount}</TableCell> : <TableCell align="right"></TableCell>}
-                          {dataRow.transtype === "debit" ? <TableCell align="right">{dataRow.amount}</TableCell> : <TableCell align="right"></TableCell>}
-                          <TableCell align="right" style={ { fontWeight:"bold" } }>{dataRow.balance}</TableCell>
+                          {dataRow.transtype.ttype === "credit" ? <TableCell align="right">{Format.formatMoneyNoSymbol(dataRow.amount)}</TableCell> : <TableCell align="right"></TableCell>}
+                          {dataRow.transtype.ttype === "debit" ? <TableCell align="right">{Format.formatMoneyNoSymbol(dataRow.amount)}</TableCell> : <TableCell align="right"></TableCell>}
+                          <TableCell align="right" style={ { fontWeight:"bold" } }>{Format.formatMoneyNoSymbol(dataRow.balance)}</TableCell>
                         </TableRow>
                 )) : null
                 }

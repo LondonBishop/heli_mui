@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import HeliTable from '../components/HeliTable';
+import Format from '../components/Format';
 
 
 
@@ -12,7 +13,7 @@ class HeliContainer extends Component {
    
   render () {  
 
-    const { classes,  } = this.props;
+    const { classes  } = this.props;
 
     return (
             <div>
@@ -21,18 +22,18 @@ class HeliContainer extends Component {
 
                     <Divider variant="middle" style={ { margin: 25 } }/>
                     <Typography variant="h7" component="h3" >
-                        Your total bills : £ { this.props.objNetWorth.totalBills +  this.props.objNetWorth.totalCreditCards}
+                        Your total bills : {Format.formatMoneys(this.props.objNetWorth.totalBills +  this.props.objNetWorth.totalCreditCards)}
                     </Typography>
                     <Divider variant="middle" style={ { margin: 15 } }/>
                     <Typography variant="h7" component="h3">
-                        Your net worth : £ { this.props.objNetWorth.totalNetWorthWithOutBills }
+                        Your net worth : {Format.formatMoneys( this.props.objNetWorth.totalNetWorthWithOutBills) }
                     </Typography>
                     <Divider variant="middle" style={ { margin: 15, backgroundColor:"orange"} }/>
                     <Typography variant="h7" component="h3">
-                        Your Net Worth (inc bills and credit cards) : £ { 
+                        Your Net Worth (inc bills and credit cards) :  { Format.formatMoneys(
                           (this.props.objNetWorth.totalNetWorthWithOutBills + 
                            this.props.objNetWorth.totalBills + 
-                           this.props.objNetWorth.totalCreditCards).toFixed(2) }
+                           this.props.objNetWorth.totalCreditCards).toFixed(2)) }
                     </Typography>
                    
                     <Divider variant="middle"  style={ { margin: 15, backgroundColor:"orange"} }/>

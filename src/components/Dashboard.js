@@ -24,8 +24,11 @@ import BankAccountContainer from '../containers/BankAccountContainer';
 import BillsContainer from '../containers/BillsContainer';
 import HeliContainer from '../containers/HeliContainer';
 
-const drawerWidth = 240;
 
+
+
+
+const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
@@ -123,8 +126,10 @@ class Dashboard extends React.Component {
     totalNetWorthWithOutBills : 0,
   }
 
+    
+
   componentDidMount () {
-    fetch ("http://localhost:3000/user", 
+    fetch ("http://localhost:3000/users/1", 
             {
               method: "GET",
               headers:{
@@ -159,9 +164,11 @@ class Dashboard extends React.Component {
 
   loadMasterData (userData) {
 
-    let bankData = userData.filter( dataElement => dataElement.entity === "bank");
-    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcard");
-    let billsData = userData.filter( dataElement => dataElement.entity === "bill");
+    let bankData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bank");
+
+    let creditCardsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "creditcard");
+
+    let billsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bill");
 
     this.setState ( { 
       userData : userData,
@@ -181,7 +188,7 @@ class Dashboard extends React.Component {
       switch (this.state.topPage) {
         case "accounts":
           // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
-          return <BankAccountContainer BankAccounts={ this.state.bankAccounts } />
+          return <BankAccountContainer bankAccounts={ this.state.bankAccounts } />
           break;
         
         case "creditcards":
@@ -207,9 +214,9 @@ class Dashboard extends React.Component {
 
 
   calculateBalanceIndicator = (account) => {
-  
-      if (account.transactions[0].balance !== 0) {
-        if (account.transactions[account.transactions.length -1].balance > account.transactions[0].balance ) {
+
+      if (account.accountlines[0].balance !== 0) {
+        if (account.accountlines[account.accountlines.length -1].balance > account.accountlines[0].balance ) {
             account.balanceIndicator = "down"
         } else {
             account.balanceIndicator = "up"
@@ -229,25 +236,24 @@ class Dashboard extends React.Component {
 
     // bank accounts 
     bankAccounts.forEach( bank => {
-      objNetWorth.totalNetWorthWithOutBills += bank.transactions[0].balance;
+      objNetWorth.totalNetWorthWithOutBills += Number(bank.accountlines[0].balance);
     })
     
      //credit cards
     creditCards.forEach (creditCard => {
-      objNetWorth.totalCreditCards += Number(creditCard.transactions[0].balance) * -1;
+      objNetWorth.totalCreditCards += Number(creditCard.accountlines[0].balance) * -1;
     });
 
     //bills
     bills.forEach (bill => { 
-      objNetWorth.totalBills += Number(bill.transactions[0].amount);
+      objNetWorth.totalBills += Number(bill.accountlines[0].amount);
     });
 
-    // objNetWorth.totalBills = totalBillsAndCC.toFixed(2);
-    // objNetWorth.totalNetWorthWithOutBills = totalNetWorthWithOutBills.toFixed(2); 
-    // objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
-   
-  }
+    objNetWorth.totalBills = Number(objNetWorth.totalBills.toFixed(2));
+    objNetWorth.totalNetWorthWithOutBills = Number(objNetWorth.totalNetWorthWithOutBills.toFixed(2));
+    objNetWorth.totalCreditCards =  Number(objNetWorth.totalCreditCards.toFixed(2));
 
+  }
 
 
 
