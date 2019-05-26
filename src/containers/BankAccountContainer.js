@@ -25,6 +25,7 @@ class BankAccountContainer extends Component {
     }
 
 
+
     static getDerivedStateFromProps(props, state){
       
         if (props.bankAccounts[0] !== state.selectedAccount) {
@@ -108,17 +109,20 @@ class BankAccountContainer extends Component {
 
   const styles = theme => ({
       root: {
-        display: 'flex',
+        display: 'inline-flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        width : '100%',
+        // justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
+     
       },
       gridList: {
         flexWrap: 'nowrap',
+        minWidth:'50%',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
-        cols : 1
+        cols : 1,
       },
       title: {
         color: theme.palette.primary.light,

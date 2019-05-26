@@ -11,14 +11,19 @@ import Format from '../components/Format';
 
 const styles = {
   root: {
-    width: '100%',
-    overflowX: 'auto',
-   
+    width: '80%',
+    // overflowX: 'auto',
   },
   table: {
-    maxWidth: 700,
+    width: '100%',
+    // boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12)',
+    // border: '14px',
   },
 };
+
+
+
+
 
 
 
@@ -38,9 +43,9 @@ class BillsTable extends Component {
 
       let newData2 = creditcards.map ( cc => (
         { r1: cc.account_desc, 
-          r2: cc.duedate, 
+          r2: Format.formatDate(cc.duedate), 
           r3: Format.formatMoneyNoSymbol(cc.accountlines[0].balance),
-          r4: ""
+          r4: cc.recurring
         }
     ))
     

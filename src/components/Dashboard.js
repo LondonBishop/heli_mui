@@ -10,19 +10,15 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-// import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
-// import { mainListItems, secondaryListItems } from '../mui_components/listItems';
-// import SimpleLineChart from '../../mui/SimpleLineChart';
 import SimpleTable from './SimpleTable';
 import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
-// import { switchCase } from '@babel/types';
 import BankAccountContainer from '../containers/BankAccountContainer'; 
 import BillsContainer from '../containers/BillsContainer';
 import HeliContainer from '../containers/HeliContainer';
+import CreditCardContainer from '../containers/CreditCardContainer';
 
 
 
@@ -118,6 +114,7 @@ class Dashboard extends React.Component {
     bills : [],
     topPage : "creditcards",
     bottomPage : null,
+    selectedAccount : null
   };
 
   objNetWorth = {
@@ -159,6 +156,14 @@ class Dashboard extends React.Component {
       topPage : selection,
     });
   }
+
+  handleSelectedAccount = (event, account) => {
+    event.preventDefault();
+    this.setState({ 
+      selectedAccount : account,
+    });
+
+  }
  
 // ***** methods **********************************************************
 
@@ -185,6 +190,7 @@ class Dashboard extends React.Component {
 
   switchTopPage  = () => {
 
+
       switch (this.state.topPage) {
         case "accounts":
           // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
@@ -192,7 +198,17 @@ class Dashboard extends React.Component {
           break;
         
         case "creditcards":
-          // return <BankAccountContainer BankAccounts={ this.state.creditCards } />
+
+        if (this.state.creditCards.length > 0) {
+            if (this.state.selectedAccount) {
+                return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.selectedAccount } handleSelectedAccount={ this.handleSelectedAccount }/>
+            } else {
+                return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.creditCards[0] } handleSelectedAccount={ this.handleSelectedAccount }/>
+            }
+        } else {
+            // bring screen up with + cc button.
+        }
+
           break;
 
 
@@ -265,7 +281,6 @@ class Dashboard extends React.Component {
     const { classes } = this.props;
 
     
-
     return (
 
       <div className={classes.root}>

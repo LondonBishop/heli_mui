@@ -6,18 +6,20 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Format from '../components/Format';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class TopPageCard2 extends Component {
+class TopPageCard2 extends Component {
 
     render() {
 
-        const { account, handleEditCard, handleSelectCard } = this.props
+        const { classes, account, handleEditCard, handleSelectCard } = this.props
 
         return (
 
-            <div>
+            <div className={classes.root}>
                 { account ? (
-                    <Card>
+                    <Card className={classes.card}>
                     <CardContent>
                         <Typography style={ { fontSize:18} } >
                                 {account.account_desc}
@@ -43,3 +45,25 @@ export default class TopPageCard2 extends Component {
     }
 }
 
+// ************************************************************************
+
+const styles = theme => ({
+    root: {
+    //   display: 'flex',
+    //   flexWrap: 'wrap',
+    //   overflow: 'hidden',
+      backgroundColor:' theme.palette.background.paper,',
+    },
+
+      card: {
+        backgroundColor:'#fcae3c',
+      }
+  });
+  
+
+
+TopPageCard2.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+export default withStyles(styles)(TopPageCard2);

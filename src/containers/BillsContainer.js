@@ -22,7 +22,6 @@ export default class BillsContainer extends Component {
                     Payments coming up...
                 </Typography>
                 <BillsTable bills= { bills } creditCards={ creditCards } />
-                <Divider variant="middle" style={ { marginTop: 15 } }/>
                 <BillTotal totalBills={ objNetWorth.totalBills + objNetWorth.totalCreditCards } />
             </div>
         );

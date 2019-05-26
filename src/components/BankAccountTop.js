@@ -12,7 +12,6 @@ import TopPageCard2 from './TopPageCard2'
 
 
 
-// const tileData =[ {name: "Barclays", balance : "2,650.44"}, {name : "Citi", balance: "12.99"}, {name : "Halifax Saver", balance: "36,500.99"}]
 
 
 class BankAccountTop extends Component {
@@ -45,12 +44,14 @@ class BankAccountTop extends Component {
         justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
+      
       },
       gridList: {
         flexWrap: 'nowrap',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
-        cols : 1
+        cols : 1,
+        
       },
       title: {
         color: theme.palette.primary.light,

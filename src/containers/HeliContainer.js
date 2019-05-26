@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import HeliTable from '../components/HeliTable';
 import Format from '../components/Format';
+import TopPageCard3 from '../components/TopPageCard3'
 
 
 
@@ -20,7 +21,7 @@ class HeliContainer extends Component {
                 <Paper className={classes.root} elevation={1}>
                     <HeliTable accounts={this.props.bankAccounts} />
 
-                    <Divider variant="middle" style={ { margin: 25 } }/>
+                    {/* <Divider variant="middle" style={ { margin: 25 } }/>
                     <Typography variant="h7" component="h3" >
                         Your total bills : {Format.formatMoneys(this.props.objNetWorth.totalBills +  this.props.objNetWorth.totalCreditCards)}
                     </Typography>
@@ -36,7 +37,8 @@ class HeliContainer extends Component {
                            this.props.objNetWorth.totalCreditCards).toFixed(2)) }
                     </Typography>
                    
-                    <Divider variant="middle"  style={ { margin: 15, backgroundColor:"orange"} }/>
+                    <Divider variant="middle"  style={ { margin: 15, backgroundColor:"orange"} }/> */}
+                    <TopPageCard3 objNetWorth={this.props.objNetWorth} />
                 </Paper>
             </div>
          );
@@ -53,6 +55,7 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
+      maxWidth : '85%',
     },
   });
 
