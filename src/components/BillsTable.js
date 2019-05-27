@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 const styles = {
   root: {
     width: '80%',
+    marginTop : '15px'
     // overflowX: 'auto',
   },
   table: {
@@ -23,7 +24,6 @@ const styles = {
 
 class BillsTable extends Component {
   
-
   render () {
       
     const { classes, combinedData } = this.props;

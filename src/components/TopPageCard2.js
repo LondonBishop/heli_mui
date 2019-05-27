@@ -49,13 +49,16 @@ class TopPageCard2 extends Component {
 
 const styles = theme => ({
     root: {
-    //   display: 'flex',
-    //   flexWrap: 'wrap',
+    // display: 'flex',
+    // flexWrap: 'wrap',
+    
     //   overflow: 'hidden',
       backgroundColor:' theme.palette.background.paper,',
     },
 
       card: {
+        margin : '10px',
+        minWidth : '200px',
         backgroundColor:'#fcae3c',
       }
   });

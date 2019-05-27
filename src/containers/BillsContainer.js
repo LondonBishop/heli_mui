@@ -119,12 +119,12 @@ export default class BillsContainer extends Component {
 
         return (
             <div>
-                <BillSelectorContainer handleBillsDueChange={ this.handleBillsDueChange } />
+                <BillSelectorContainer handleBillsDueChange={ this.handleBillsDueChange } style ={{marginBottom : 20}} />
 
-                <Divider variant="middle" style={ { marginBottom: 15 } }/>
-                <Typography variant="h6" gutterBottom component="h2">
+                {/* <Divider variant="middle" style={ { marginBottom: 15 } }/> */}
+                {/* <Typography variant="h6" gutterBottom component="h2" style={{ marginTop : 25}}>
                     Payments coming up...
-                </Typography>
+                </Typography> */}
 
                 { this.loadBillsTable(this.state.billsFilter) }
 

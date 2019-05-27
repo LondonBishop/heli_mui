@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 // import StarBorderIcon from '@material-ui/icons/StarBorder';
 // import tileData from './tileData';
 import TopPageCard2 from './TopPageCard2'
+import Paper from '@material-ui/core/Paper'
 
 
 
@@ -20,16 +21,16 @@ class BankAccountTop extends Component {
 
         return (
 
-          <div className={classes.root}>
+          <Paper className={classes.root}>
 
               <Grid container spacing={24} style ={ { padding:24 } }>
                   {BankAccounts.map( account  => (
-                      <Grid item xs={12} sm={6} lg={6} xl={3} >
+                      <Grid className={classes.gridList} >
                           <TopPageCard2 account={ account } handleEditCard={ handleEditCard } handleSelectCard={ handleSelectCard } />
                       </Grid> ) ) }
               </Grid>
 
-          </div>
+          </Paper>
         );
       }
     }
@@ -45,10 +46,12 @@ class BankAccountTop extends Component {
       
       },
       gridList: {
-        flexWrap: 'nowrap',
+        display :'inline-flex',
+        flexWrap: 'wrap',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
         cols : 1,
+        marginRight : '30px'
         
       },
       title: {

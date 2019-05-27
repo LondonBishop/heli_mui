@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import BankAccountTop from '../components/BankAccountTop'
 import BankTable from '../components/BankTable'
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
 
 class BankAccountContainer extends Component {
 
@@ -54,11 +55,6 @@ class BankAccountContainer extends Component {
          });
       }
 
-
-      switchBottomPageView = () => {
-      }
-
-
       
 
 
@@ -71,35 +67,21 @@ class BankAccountContainer extends Component {
         
         return (
 
-          <div className={classes.root}>
-              <div className={classes.gridList}>
+          <div >
+            <div className={classes.root}>
+              <Paper >
                   <BankAccountTop BankAccounts ={ bankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+              </Paper>
               </div>
-              <Divider variant="middle" style={ { marginTop : 45 } }/>
-              {/* <BottomData firstTimeInFlag={firstTimeInFlag} /> */}
-             
-              {/* {  !inBoundData[0] && this.state.selectedBankId ? 
-                  null
-                  : 
-                  <div className={classes.tableContainer}>
-                      <BankTable inBoundData={ inBoundData[0].transactions } />
-                  </div>
-              } */}
 
-              {/* { 
-                inBoundData[0]
-                ? 
-                <div className={classes.tableContainer}>
-                  <BankTable inBoundData={ inBoundData[0].transactions } />
-                </div>
-                : null
-              }
-                //  */}
-        
-                {/* <BankTable inBoundData={ this.state.account } /> */}
-            { this.state.selectedAccount ?
+              {/* <Divider variant="middle" style={ { marginTop : 45 } }/> */}
+              <div className={classes.root}>
+              <Paper>
+              { this.state.selectedAccount ?
                  <BankTable account={ this.state.selectedAccount } />
                  : null }
+              </Paper>
+              </div>
           </div>
         );
       }
@@ -109,16 +91,18 @@ class BankAccountContainer extends Component {
 
   const styles = theme => ({
       root: {
-        display: 'inline-flex',
-        flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'nowrap',
         width : '100%',
+        // marginBottom : '5px',
         // justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
-     
+        padding : '15px',
       },
       gridList: {
-        flexWrap: 'nowrap',
+        display: 'flex',
+        flexWrap: 'wrap',
         minWidth:'50%',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',

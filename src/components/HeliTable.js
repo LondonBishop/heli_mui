@@ -40,7 +40,8 @@ class HeliTable extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell>Account</TableCell>
-                  <TableCell align="right">Balance</TableCell>
+                  <TableCell align="right">Start Balance</TableCell>
+                  <TableCell align="right">End Balance</TableCell>
                   <TableCell align="right">Indicator</TableCell>
                 </TableRow>
               </TableHead>
@@ -50,6 +51,7 @@ class HeliTable extends Component {
                  accounts.map( dataRow => (
                         <TableRow>
                           <TableCell component="th" scope="row">{dataRow.account_desc}</TableCell>
+                          <TableCell align="right" style={ { fontWeight:"bold" } }>{Format.formatMoneyNoSymbol(dataRow.accountlines[dataRow.accountlines.length -1 ].balance)}</TableCell>
                           <TableCell align="right" style={ { fontWeight:"bold" } }>{Format.formatMoneyNoSymbol(dataRow.accountlines[0].balance)}</TableCell>
                           {dataRow.balanceIndicator === "up" ? <TableCell align="right"><Icon><Mood/><TrendingUpOutlined/></Icon></TableCell> : null}
                           {dataRow.balanceIndicator === "down" ? <TableCell align="right"><Icon><SentimentDissatisfiedRounded /><TrendingDownOutlined /></Icon></TableCell> : null}

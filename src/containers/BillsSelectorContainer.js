@@ -16,6 +16,9 @@ class BillsSelectorContainer extends Component {
     return (
             <div>
                 <Paper className={classes.root} elevation={1}>
+                <Typography variant="h6" gutterBottom component="h2" style={{ marginTop : 5}}>
+                    Payments coming up...
+                </Typography>
                 <BillSelector handleBillsDueChange={ handleBillsDueChange }/>
                 </Paper>
             </div>
@@ -33,6 +36,7 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
+      width: '80%',
     },
   });
 
