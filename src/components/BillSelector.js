@@ -28,7 +28,6 @@ class NativeSelects extends React.Component {
   }
 
   handleChange = name => event => {
-    debugger
     this.setState({ [name]: event.target.value });
     this.props.handleBillsDueChange(event.target.value)
   };
@@ -62,9 +61,9 @@ class NativeSelects extends React.Component {
             }
           >
             <option value="" />
-            <option value={1}>...anytime</option>
-            <option value={2}>...the end of the month</option>
-            <option value={3}>...the end of the week</option>
+            <option value={'1'}>...anytime</option>
+            <option value={'2'}>...the end of the month</option>
+            <option value={'3'}>...the end next 7 days</option>
           </Select>
         </FormControl>
      

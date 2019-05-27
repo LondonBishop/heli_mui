@@ -9,8 +9,9 @@ import Format from '../components/Format';
 
 export default class BillsContainer extends Component {
 
-
-
+    state ={
+        billsFilter : "1",
+    }
     
     combinedData = (bills, creditcards) => {
 
@@ -33,26 +34,100 @@ export default class BillsContainer extends Component {
       return [...newData1, ...newData2]  
     };
 
+    checkTransDate = (dueDate, selection) => {
+
+        debugger
+        let endOfDate = null;
+
+        let dueDateSplit = dueDate.split('/');
+        let newDueDate = new Date(dueDateSplit[2], dueDateSplit[1]-1, dueDateSplit[0]);
+
+        let today = new Date
+
+        switch (selection) {
+            case "2":
+                endOfDate = new Date(today.getFullYear(), today.getMonth() + 1, 0 )
+                break;
+            
+            case "3":
+                endOfDate = new Date(today)
+                endOfDate.setDate(endOfDate.getDate() + 7)
+                break; 
+        }
+    
+        if (newDueDate <= endOfDate ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     handleBillsDueChange = (selection) => {
-        console.log (selection)
-        debugger
+        this.setState({
+            billsFilter : selection
+        })
     }
+
+
+    loadBillsTable = (selection) => {
+
+        // const { bills, creditCards, objNetWorth } = this.props
+      
+        let combinedData = this.combinedData( this.props.bills, this.props.creditCards )
+  
+        switch (selection) {
+            case "1":
+            return <div><BillsTable combinedData={ combinedData } />
+                    <BillTotal totalBills={ this.props.objNetWorth.totalBills + this.props.objNetWorth.totalCreditCards } /></div>
+            break;
+
+           case "2":                
+                
+                let newCombinedData = combinedData.filter( row => (
+                    this.checkTransDate(row.r2, selection)
+                    ))
+                
+                let totalBills = 0;
+                newCombinedData.forEach(element => {
+                    totalBills += Number(element.r3) * -1
+                });
+               
+               return <div><BillsTable combinedData={ newCombinedData } /> 
+                        <BillTotal totalBills={ totalBills } /></div>
+               break;
+
+           case "3":
+                let newCombinedData2 = combinedData.filter( row => (
+                    this.checkTransDate(row.r2, selection)
+                    ))
+                
+                let totalBills2 = 0;
+                newCombinedData2.forEach(element => {
+                    totalBills2 += Number(element.r3) * -1
+                });
+               
+               return <div><BillsTable combinedData={ newCombinedData2 } /> 
+                        <BillTotal totalBills={ totalBills2 } /></div>
+               break;
+       }
+    }
+
 
     
     render () {
 
-        const { bills, creditCards, objNetWorth } = this.props
-
         return (
             <div>
                 <BillSelectorContainer handleBillsDueChange={ this.handleBillsDueChange } />
+
                 <Divider variant="middle" style={ { marginBottom: 15 } }/>
                 <Typography variant="h6" gutterBottom component="h2">
                     Payments coming up...
                 </Typography>
-                <BillsTable combinedData={ this.combinedData( bills, creditCards )} />
-                <BillTotal totalBills={ objNetWorth.totalBills + objNetWorth.totalCreditCards } />
+
+                { this.loadBillsTable(this.state.billsFilter) }
+
             </div>
         );
     }
