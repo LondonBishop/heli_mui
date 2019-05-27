@@ -11,12 +11,12 @@ class BillsSelectorContainer extends Component {
    
   render () {  
 
-    const { classes } = this.props;
+    const { classes, handleBillsDueChange } = this.props;
 
     return (
             <div>
                 <Paper className={classes.root} elevation={1}>
-                <BillSelector />
+                <BillSelector handleBillsDueChange={ handleBillsDueChange }/>
                 </Paper>
             </div>
          );

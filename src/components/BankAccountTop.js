@@ -12,8 +12,6 @@ import TopPageCard2 from './TopPageCard2'
 
 
 
-
-
 class BankAccountTop extends Component {
 
       render() {

@@ -13,8 +13,10 @@ import Select from '@material-ui/core/Select';
 
 
 class NativeSelects extends React.Component {
+
+
   state = {
-    dueby: '10',
+    dueby: '1',
     name: 'hai',
     labelWidth: 0,
   };
@@ -26,13 +28,15 @@ class NativeSelects extends React.Component {
   }
 
   handleChange = name => event => {
-
     debugger
     this.setState({ [name]: event.target.value });
+    this.props.handleBillsDueChange(event.target.value)
   };
 
+
   render() {
-    const { classes } = this.props;
+
+    const { classes, handleBillsDueChange } = this.props;
 
     return (
       <div className={classes.root}>
@@ -45,23 +49,22 @@ class NativeSelects extends React.Component {
           >
             Bills due by
           </InputLabel>
-          <Select
-            native
+          <Select native
             value={this.state.dueby}
-            onChange={this.handleChange('dueby')}
+            onChange={ this.handleChange('dueby') }
             input={
               <OutlinedInput
                 name="dueby"
                 labelWidth={this.state.labelWidth}
+              
                 id="outlined-dueby-native-simple"
               />
             }
           >
             <option value="" />
-            <option value={10}>...anytime</option>
-            <option value={20}>...the end of the month</option>
-            <option value={30}>...the end of the week</option>
-            <option value={40}>...the end of the today</option>
+            <option value={1}>...anytime</option>
+            <option value={2}>...the end of the month</option>
+            <option value={3}>...the end of the week</option>
           </Select>
         </FormControl>
      

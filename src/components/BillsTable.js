@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Format from '../components/Format';
 
 const styles = {
   root: {
@@ -22,40 +21,12 @@ const styles = {
 };
 
 
-
-
-
-
-
 class BillsTable extends Component {
   
-  
-  combineData = (bills, creditcards) => {
-
-
-      let newData1 = bills.map ( bill => (
-          { r1: bill.account_desc, 
-            r2: Format.formatDate(bill.duedate), 
-            r3: Format.formatMoneyNoSymbol((bill.accountlines[0].amount * -1).toFixed(2)),
-            r4: bill.recurring
-          }
-      ))
-
-      let newData2 = creditcards.map ( cc => (
-        { r1: cc.account_desc, 
-          r2: Format.formatDate(cc.duedate), 
-          r3: Format.formatMoneyNoSymbol(cc.accountlines[0].balance),
-          r4: cc.recurring
-        }
-    ))
-    
-    return [...newData1, ...newData2]
-
-  }
 
   render () {
       
-    const { classes, bills, creditCards } = this.props;
+    const { classes, combinedData } = this.props;
 
     return (
           <Paper className={classes.root}>
@@ -72,7 +43,7 @@ class BillsTable extends Component {
               </TableHead>
 
               <TableBody>
-                { this.combineData(bills, creditCards).map( dataRow => (
+                { combinedData.map( dataRow => (
                     <TableRow>
                       <TableCell component="th" scope="row" align="left">{dataRow.r1}</TableCell>
                       <TableCell align="left">{dataRow.r2}</TableCell>
