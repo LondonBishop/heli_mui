@@ -42,7 +42,7 @@ class TopPageCard3 extends Component {
                     <Paper className={classes.card} style ={{backgroundColor: 'orange'}}>
                         <img src={require('../images/money.jpeg')} className={classes.cardImage} />
                         <div className={classes.cardTitle}>
-                                Your Net Worth (with Bills)
+                                Your Net Worth (after Bills)
                         </div>
                         <div className={classes.cardDesc}>
                                 { Format.formatMoneys(
@@ -50,9 +50,6 @@ class TopPageCard3 extends Component {
                                 this.props.objNetWorth.totalBills + 
                                 this.props.objNetWorth.totalCreditCards).toFixed(2)) }
                         </div>
-                        {/* <div >
-                            <button type='button' class='card-action-readMore'>Read More</button>
-                        </div> */}
                     </Paper>
 
                 </div>

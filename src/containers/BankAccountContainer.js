@@ -48,11 +48,19 @@ class BankAccountContainer extends Component {
         
         event.preventDefault();
         console.log ("event ---> select card")
+        debugger  
 
+        // if  (event.target.parentElement.parentNode.parentNode.style.backgroundColor !== 'orange') {
+        //   event.target.parentElement.parentNode.parentNode.style.backgroundColor = 'orange'
+        // } else {
+        //   event.target.parentElement.parentNode.parentNode.style.backgroundColor = 'grey'
+        // }
 
         this.setState ( { 
           selectedAccount : account
          });
+
+
       }
 
       

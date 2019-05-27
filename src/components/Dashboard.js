@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
     bankAccounts  : [],
     creditCards : [],
     bills : [],
-    topPage : "creditcards",
+    topPage : "accounts",
     bottomPage : null,
     selectedAccount : null
   };
@@ -163,6 +163,8 @@ class Dashboard extends React.Component {
       selectedAccount : account,
     });
 
+    
+
   }
  
 // ***** methods **********************************************************
@@ -170,9 +172,7 @@ class Dashboard extends React.Component {
   loadMasterData (userData) {
 
     let bankData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bank");
-
     let creditCardsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "creditcard");
-
     let billsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bill");
 
     this.setState ( { 
@@ -193,37 +193,35 @@ class Dashboard extends React.Component {
 
       switch (this.state.topPage) {
         case "accounts":
-          // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
-          return <BankAccountContainer bankAccounts={ this.state.bankAccounts } />
-          break;
+              // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
+              return <BankAccountContainer bankAccounts={ this.state.bankAccounts } />
+              break;
         
         case "creditcards":
 
-        if (this.state.creditCards.length > 0) {
-            if (this.state.selectedAccount) {
-                return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.selectedAccount } handleSelectedAccount={ this.handleSelectedAccount }/>
-            } else {
-                return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.creditCards[0] } handleSelectedAccount={ this.handleSelectedAccount }/>
-            }
-        } else {
-            // bring screen up with + cc button.
-        }
+                if (this.state.creditCards.length > 0) {
+                    if (this.state.selectedAccount) {
+                        return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.selectedAccount } handleSelectedAccount={ this.handleSelectedAccount }/>
+                    } else {
+                        return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.creditCards[0] } handleSelectedAccount={ this.handleSelectedAccount }/>
+                    }
+                } else {
+                    // bring screen up with + cc button.
+                }
 
-          break;
+                break;
 
 
         case "bills" :
-          return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
-          break;
+                return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
+                break;
 
         case "invest" :
-          break;
+                break;
 
         case "heli" :
-          return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
-          break;
-
-        default:
+                return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
+                break;
 
       }
   }
