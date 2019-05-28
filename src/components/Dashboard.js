@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
 import BankAccountContainer from '../containers/BankAccountContainer'; 
@@ -113,7 +114,7 @@ class Dashboard extends React.Component {
     bankAccounts  : [],
     creditCards : [],
     bills : [],
-    topPage : "accounts",
+    topPage : null,
     bottomPage : null,
     selectedAccount : null,
     isLoginIn : false,
@@ -126,7 +127,6 @@ class Dashboard extends React.Component {
     totalNetWorthWithOutBills : 0,
   }
 
-   
 
   componentDidMount () {
     fetch ("http://localhost:3000/users/1", 
@@ -162,12 +162,14 @@ class Dashboard extends React.Component {
     });
   };
 
+
   handleSelectedAccount = (event, account) => {
     event.preventDefault();
     this.setState({ 
       selectedAccount : account,
     });
   };
+
 
   handleLoginClick = (userName, password) => {
 
@@ -176,14 +178,17 @@ class Dashboard extends React.Component {
     this.setState({
         isLoginIn : true,
         userName : userName,
+        topPage : 'accounts',
     })
   };
+
 
   handleLogoutClick () {
     this.setState({
       isLoginIn : null,
       userName : null,
       password: null,
+      topPage : null
     })
   };
 
@@ -313,11 +318,13 @@ class Dashboard extends React.Component {
                           className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
                         >
                         <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                        
                           <IconButton
                             color="inherit"
                             aria-label="Open drawer"
                             onClick={this.handleDrawerOpen}
                             className={ classNames( classes.menuButton, this.state.open && classes.menuButtonHidden,) }
+                          
                           >
                             <MenuIcon />
                           </IconButton>
@@ -328,7 +335,7 @@ class Dashboard extends React.Component {
                             noWrap
                             className={classes.title}
                           >
-                            Helicopter Finance
+                                Helicopter Finance
                           </Typography>
 
                         </Toolbar>
@@ -346,10 +353,12 @@ class Dashboard extends React.Component {
                             <ChevronLeftIcon />
                           </IconButton>
                         </div>
+                        {/* <Divider />
+                        <IconButton><AccountCircle /> Hi {this.state.userName}! </IconButton>    */}
                         <Divider />
                         <List><MenuItems handleSideBarClick={ this.handleSideBarClick }/></List>
                         <Divider />
-                        <List><SecondListItems handleSideBarClick={ this.handleSideBarClick } /></List>
+                        <List><SecondListItems  user={this.state.userName}  handleSideBarClick={this.handleSideBarClick } /></List>
                       </Drawer>
 
                       <main className={classes.content}>

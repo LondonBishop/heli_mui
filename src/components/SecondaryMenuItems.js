@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 //icons
 import PhonelinkOff from '@material-ui/icons/PhonelinkOff'
-import PeopleIcon from '@material-ui/icons/People';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 export default class SecondListItems extends Component { 
@@ -15,7 +15,7 @@ export default class SecondListItems extends Component {
 
     render() {
   
-      const { handleSideBarClick } = this.props
+      const { user, handleSideBarClick } = this.props
 
       return (
         <div>
@@ -23,9 +23,9 @@ export default class SecondListItems extends Component {
 
           <ListItem button onClick={ (e) => handleSideBarClick(e, 'profile')} >
             <ListItemIcon>
-              <PeopleIcon />
+              <AccountCircle />
             </ListItemIcon>
-            <ListItemText primary="User Profile" />
+            <ListItemText primary={"Hi " + user + "!"} />
           </ListItem>
 
           <ListItem button onClick={(e) => handleSideBarClick(e, 'logout')} >
