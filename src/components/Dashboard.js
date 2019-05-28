@@ -12,13 +12,14 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import SimpleTable from './SimpleTable';
 import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
 import BankAccountContainer from '../containers/BankAccountContainer'; 
 import BillsContainer from '../containers/BillsContainer';
 import HeliContainer from '../containers/HeliContainer';
 import CreditCardContainer from '../containers/CreditCardContainer';
+import LoginPage from '../components/LoginPage';
+import Paper from '@material-ui/core/Paper';
 
 
 
@@ -114,7 +115,9 @@ class Dashboard extends React.Component {
     bills : [],
     topPage : "accounts",
     bottomPage : null,
-    selectedAccount : null
+    selectedAccount : null,
+    isLoginIn : false,
+    userName : null,
   };
 
   objNetWorth = {
@@ -123,7 +126,7 @@ class Dashboard extends React.Component {
     totalNetWorthWithOutBills : 0,
   }
 
-    
+   
 
   componentDidMount () {
     fetch ("http://localhost:3000/users/1", 
@@ -150,22 +153,40 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
-  handleSideBarClick = (event, selection) => {
-    event.preventDefault();
+  handleSideBarClick = (e, selection) => {
+    
+    e.preventDefault();
+
     this.setState({ 
       topPage : selection,
     });
-  }
+  };
 
   handleSelectedAccount = (event, account) => {
     event.preventDefault();
     this.setState({ 
       selectedAccount : account,
     });
+  };
 
-    
+  handleLoginClick = (userName, password) => {
 
-  }
+    console.log (userName + '   ' + password)
+
+    this.setState({
+        isLoginIn : true,
+        userName : userName,
+    })
+  };
+
+  handleLogoutClick () {
+    this.setState({
+      isLoginIn : null,
+      userName : null,
+      password: null,
+    })
+  };
+
  
 // ***** methods **********************************************************
 
@@ -190,7 +211,6 @@ class Dashboard extends React.Component {
 
   switchTopPage  = () => {
 
-
       switch (this.state.topPage) {
         case "accounts":
               // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
@@ -211,7 +231,6 @@ class Dashboard extends React.Component {
 
                 break;
 
-
         case "bills" :
                 return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
                 break;
@@ -221,6 +240,10 @@ class Dashboard extends React.Component {
 
         case "heli" :
                 return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
+                break;
+        
+        case 'logout': 
+                this.handleLogoutClick();
                 break;
 
       }
@@ -278,76 +301,73 @@ class Dashboard extends React.Component {
 
     const { classes } = this.props;
 
-    
     return (
+      <div>
+          { this.state.isLoginIn ? 
+                <div className={classes.root}>
 
-      <div className={classes.root}>
+                      <CssBaseline />
 
-        <CssBaseline />
+                      <AppBar
+                          position="absolute"
+                          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+                        >
+                        <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                          <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            onClick={this.handleDrawerOpen}
+                            className={ classNames( classes.menuButton, this.state.open && classes.menuButtonHidden,) }
+                          >
+                            <MenuIcon />
+                          </IconButton>
+                          <Typography
+                            component="h1"
+                            variant="h6"
+                            color="inherit"
+                            noWrap
+                            className={classes.title}
+                          >
+                            Helicopter Finance
+                          </Typography>
 
-        <AppBar
-            position="absolute"
-            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-          >
-          <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={ classNames( classes.menuButton, this.state.open && classes.menuButtonHidden,) }
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Helicopter
-            </Typography>
+                        </Toolbar>
+                      </AppBar>
 
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-                </Badge>
-            </IconButton> */}
+                      <Drawer
+                        variant="permanent"
+                        classes={{
+                          paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                        }}
+                        open={this.state.open}
+                      >
+                        <div className={classes.toolbarIcon}>
+                          <IconButton onClick={this.handleDrawerClose}>
+                            <ChevronLeftIcon />
+                          </IconButton>
+                        </div>
+                        <Divider />
+                        <List><MenuItems handleSideBarClick={ this.handleSideBarClick }/></List>
+                        <Divider />
+                        <List><SecondListItems handleSideBarClick={ this.handleSideBarClick } /></List>
+                      </Drawer>
 
-          </Toolbar>
-        </AppBar>
+                      <main className={classes.content}>
 
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List><MenuItems handleSideBarClick={ this.handleSideBarClick }/></List>
-          <Divider />
-          <List><SecondListItems /></List>
-        </Drawer>
+                            <div className={classes.appBarSpacer} />
 
-        <main className={classes.content}>
+                            {/* top Page */}
+                            {this.switchTopPage(classes)}
+                            
+                            {/* //bottom Page  */}
 
-              <div className={classes.appBarSpacer} />
+                      </main>
 
-              {/* top Page */}
-              {this.switchTopPage(classes)}
-
-              {/* //bottom Page  */}
-
-        </main>
-
+                </div>
+          : <LoginPage handleLoginClick={ this.handleLoginClick }/>
+      }
       </div>
-    );
+    )
   }
 }
 

@@ -11,22 +11,30 @@ import PeopleIcon from '@material-ui/icons/People';
 
 
 export default class SecondListItems extends Component { 
+
+
     render() {
+  
+      const { handleSideBarClick } = this.props
+
       return (
         <div>
           <ListSubheader inset></ListSubheader>
-          <ListItem button>
+
+          <ListItem button onClick={ (e) => handleSideBarClick(e, 'profile')} >
             <ListItemIcon>
               <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary="User Profile" />
           </ListItem>
-          <ListItem button>
+
+          <ListItem button onClick={(e) => handleSideBarClick(e, 'logout')} >
             <ListItemIcon>
               <PhonelinkOff />
             </ListItemIcon>
             <ListItemText primary="Log Out" />
           </ListItem> 
+
         </div>
       )
     }

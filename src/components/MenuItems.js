@@ -22,35 +22,35 @@ import Tram from '@material-ui/icons/Tram'
         return (
             <div>
               
-              <ListItem button onClick={ (e) => {handleSideBarClick(e, "accounts")} }>
+              <ListItem button onClick={ (e) => handleSideBarClick(e, "accounts") }>
                 <ListItemIcon>
                   <AccountBalance />
                 </ListItemIcon>
                 <ListItemText primary="Accounts" />
               </ListItem>
 
-              <ListItem button onClick={ (e) => { handleSideBarClick(e, "creditcards") } }>
+              <ListItem button onClick={ (e) => handleSideBarClick(e, "creditcards")  }>
                 <ListItemIcon>
                   <CreditCard />
                 </ListItemIcon>
                 <ListItemText primary="Credit Cards" />
               </ListItem>
 
-              <ListItem button onClick={ (e) => { handleSideBarClick(e, "bills") } } >
+              <ListItem button onClick={ (e) => handleSideBarClick(e, "bills")  } >
                 <ListItemIcon>
                   <LocalAtm />
                 </ListItemIcon>
                 <ListItemText primary="Bills" />
               </ListItem>
              
-              <ListItem button onClick={ (e) => { handleSideBarClick(e, "heli") } }>
+              <ListItem button onClick={ (e) => handleSideBarClick(e, "heli") }>
                 <ListItemIcon>
                   <Tram />
                 </ListItemIcon>
                 <ListItemText primary="Helicopter View" />
               </ListItem>
 
-              <ListItem button onClick={ (e) => { handleSideBarClick(e, "invest") } }>
+              <ListItem button onClick={ (e) => handleSideBarClick(e, "invest") }>
                 <ListItemIcon>
                   <BarChartIcon />
                 </ListItemIcon>
