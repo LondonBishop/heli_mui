@@ -17,9 +17,9 @@ class TopPageCard2 extends Component {
 
         return (
 
-            <div className={classes.root}>
+            <div className={classes.root} onClick={ (e) => { handleSelectCard(e, account) }} >
                 { account ? (
-                    <Card className={classes.card}>
+                    <Card className={classes.card}  id={"CARD" + account.id}>
                     <CardContent>
                         <Typography style={ { fontSize:18} } >
                                 {account.account_desc}
@@ -29,7 +29,7 @@ class TopPageCard2 extends Component {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button key={account.id} size="small"  style={{backgroundColor:"lightblue"}} onClick={ (e) => { handleSelectCard(e, account) } } >
+                        <Button name={account.id} size="small"  style={{backgroundColor:"lightblue"}} >
                                 Select
                         </Button>
                         {/* <Button key={account.id} size="small" color="primary" onClick={ (e) => { handleEditCard(e) } } >
@@ -59,7 +59,8 @@ const styles = theme => ({
       card: {
         margin : '10px',
         minWidth : '200px',
-        backgroundColor:'#fcae3c',
+        // backgroundColor:'#fcae3c',
+        backgroundColor : '#eaeaea',
       }
   });
   

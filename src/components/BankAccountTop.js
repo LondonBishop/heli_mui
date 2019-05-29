@@ -16,7 +16,7 @@ class BankAccountTop extends Component {
         return (
 
           <Paper className={classes.root}>
-
+            
               <Grid container spacing={24} style ={ { padding:24 } }>
                   {BankAccounts.map( account  => (
                       <Grid className={classes.gridList} >

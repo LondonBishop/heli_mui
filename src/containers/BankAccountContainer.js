@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BankAccountTop from '../components/BankAccountTop'
 import BankTable from '../components/BankTable'
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 
 class BankAccountContainer extends Component {
@@ -47,20 +46,20 @@ class BankAccountContainer extends Component {
       handleSelectCard = (event, account) => {
         
         event.preventDefault();
-        console.log ("event ---> select card")
-        debugger  
 
-        // if  (event.target.parentElement.parentNode.parentNode.style.backgroundColor !== 'orange') {
-        //   event.target.parentElement.parentNode.parentNode.style.backgroundColor = 'orange'
-        // } else {
-        //   event.target.parentElement.parentNode.parentNode.style.backgroundColor = 'grey'
-        // }
+        this.props.bankAccounts.forEach ( bankAcc => {
+          const resetCard = document.getElementById("CARD" + bankAcc.id)
+          if (resetCard.id !== account.id) {
+              resetCard.style.backgroundColor = "#eaeaea"
+          }
+      });
 
-        this.setState ( { 
+        let selectedCard = document.getElementById("CARD" + account.id)
+        selectedCard.style.backgroundColor = "#fcae3c"
+        
+        this.setState ({
           selectedAccount : account
-         });
-
-
+        })
       }
 
       

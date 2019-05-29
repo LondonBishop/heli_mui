@@ -3,34 +3,18 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BankAccountTop from '../components/BankAccountTop'
 import BankTable from '../components/BankTable'
-import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper'
 
 
 class CreditCardContainer extends Component {
 
-    // state ={
-    //     selectedAccount : "",
-    // }
   
-
-    // setDefaultAccount = () => {
-    //   if (this.props.bankAccounts) {
-    //     this.setState({
-    //       selectedAccount : this.props.bankAccounts[0]
-    //     })
-    //   }
-    // }
-
-
-    // static getDerivedStateFromProps(props, state){
-      
-    //     if (props.bankAccounts[0] !== state.selectedAccount) {
-    //       return {selectedAccount: state.selectedAccount }
-    //     } else return null
-      
-    // }
-  
+    componentDidMount() {
+      this.setState ({
+        selectedAccount : this.props.creditCards[0]
+      })
+    }
+    
     
 
 // EVENT handlers **************************************************
@@ -52,10 +36,24 @@ class CreditCardContainer extends Component {
       }
 
 
-      switchBottomPageView = () => {
+  
+    setCardColor = (creditCards, selectedAccount) => {
+
+        creditCards.forEach ( cc => {
+          const resetCard = document.getElementById("CARD" + cc.id)
+          if (resetCard) {
+            if (resetCard.id !== cc.id) {
+                resetCard.style.backgroundColor = "#eaeaea"
+            }
+          }
+      });
+
+        let selectedCard = document.getElementById("CARD" + selectedAccount.id)
+        if (selectedCard) {
+            selectedCard.style.backgroundColor = "#fcae3c"
+        }
+
       }
-
-
       
 
 
@@ -64,7 +62,9 @@ class CreditCardContainer extends Component {
       render() {
 
         const { classes, creditCards, selectedAccount, handleSelectedAccount } = this.props
-
+        
+        
+        
         return (
                 <div className={classes.root}>
                     <Paper className={classes.gridList}>
@@ -72,6 +72,7 @@ class CreditCardContainer extends Component {
                     </Paper>
         
                     <Paper className={classes.table}>
+                    { this.setCardColor( creditCards, selectedAccount) }
                             <BankTable account={ selectedAccount } /> 
                     </Paper>    
                 </div>

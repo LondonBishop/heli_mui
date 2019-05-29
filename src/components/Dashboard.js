@@ -21,6 +21,7 @@ import HeliContainer from '../containers/HeliContainer';
 import CreditCardContainer from '../containers/CreditCardContainer';
 import LoginPage from '../components/LoginPage';
 import Paper from '@material-ui/core/Paper';
+// import drawerImage from '../images/heli3.jpg';
 
 
 
@@ -93,6 +94,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: '100vh',
     overflow: 'auto',
+    // backgroundImage: 'url(' + drawerImage + ')'
   },
   chartContainer: {
     marginLeft: -22,
@@ -117,7 +119,7 @@ class Dashboard extends React.Component {
     topPage : null,
     bottomPage : null,
     selectedAccount : null,
-    isLoginIn : false,
+    isLoginIn : null,
     userName : null,
   };
 
@@ -175,11 +177,16 @@ class Dashboard extends React.Component {
 
     console.log (userName + '   ' + password)
 
-    this.setState({
-        isLoginIn : true,
-        userName : userName,
-        topPage : 'accounts',
-    })
+    if (userName || password)
+    {
+      this.setState({
+          isLoginIn : true,
+          userName : userName,
+          topPage : 'accounts',
+      })
+    } else {
+      alert("Please enter a valid username and password")
+    }
   };
 
 
@@ -217,8 +224,8 @@ class Dashboard extends React.Component {
   switchTopPage  = () => {
 
       switch (this.state.topPage) {
+
         case "accounts":
-              // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
               return <BankAccountContainer bankAccounts={ this.state.bankAccounts } />
               break;
         
@@ -347,6 +354,7 @@ class Dashboard extends React.Component {
                           paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
                         }}
                         open={this.state.open}
+                        
                       >
                         <div className={classes.toolbarIcon}>
                           <IconButton onClick={this.handleDrawerClose}>
