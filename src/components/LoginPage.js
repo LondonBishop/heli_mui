@@ -7,7 +7,7 @@ import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import drawerImage from '../images/heli2.jpg';
+import drawerImage from '../images/backdrop2.jpg';
 import logoImage from '../images/HeliLongLogo.png';
 
 
@@ -31,12 +31,12 @@ class LoginPage extends Component {
 
         return (
 
-          <div >
-              <Paper className={classes.backdrop}>
+          <div className={classes.backdrop} >
+
 
                 <form className={classes.form}>
 
-                    <img  src={logoImage} className={classes.logo} />
+                    <img  src={logoImage} className={classes.logo}  />
 
                     {/* <Paper className={classes.headerBar}>
                         <Typography className={classes.headerBarTitle}>
@@ -82,7 +82,7 @@ class LoginPage extends Component {
 
                 </form>
 
-            </Paper>
+           
 
           </div>
 
@@ -96,8 +96,7 @@ const styles = theme => ({
 
     backdrop : {
         padding : '50px',
-        backgroundImage: 'url(' + drawerImage + ')'
-
+        backgroundImage: 'url(' + drawerImage + ')',
     },
 
     body : {
@@ -115,7 +114,7 @@ const styles = theme => ({
     form : {
         width: '280px',
         margin: '4em auto',
-        padding: '1.5em 2em 2em 2em',
+        padding: '1.0em 2em 2em 2em',
         // background: '#fafafa',
         background : 'white',
         border: '1px solid #ebebeb',

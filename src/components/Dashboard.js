@@ -105,6 +105,12 @@ const styles = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+
+  toolbarLogo : {
+    width : '50px',
+    height : '50px',
+    marginRight : '40px',
+  }
 });
 
 
@@ -119,7 +125,7 @@ class Dashboard extends React.Component {
     topPage : null,
     bottomPage : null,
     selectedAccount : null,
-    isLoginIn : true,
+    isLoginIn : false,
     userName : null,
   };
 
@@ -348,6 +354,7 @@ class Dashboard extends React.Component {
                           >
                                 Helicopter Finance
                           </Typography>
+                          
 
                         </Toolbar>
                       </AppBar>
@@ -361,6 +368,7 @@ class Dashboard extends React.Component {
                         
                       >
                         <div className={classes.toolbarIcon}>
+                          <img src={require('../images/HeliLogo.png')} className={classes.toolbarLogo}  />
                           <IconButton onClick={this.handleDrawerClose}>
                             <ChevronLeftIcon />
                           </IconButton>
