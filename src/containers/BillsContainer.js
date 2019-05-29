@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import BillsTable from '../components/BillsTable'
+import BillsTable from '../components/bills/BillsTable'
 import Typography from '@material-ui/core/Typography'
-import BillTotal from '../components/BillsTotal'
+import BillTotal from '../components/bills/BillsTotal'
 import Paper from '@material-ui/core/Paper'
 import BillSelectorContainer from '../containers/BillsSelectorContainer';
-import Format from '../components/Format';
-import HeliChart from '../components/HeliChart';
+import Format from '../utils/Format';
+import HeliChart from '../components/heli/HeliChart';
 
 
 export default class BillsContainer extends Component {

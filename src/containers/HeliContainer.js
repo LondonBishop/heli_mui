@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import HeliTable from '../components/HeliTable';
-import Format from '../components/Format';
+import HeliTable from '../components/heli/HeliTable';
+import Format from '../utils/Format';
 import TopPageCard3 from '../components/TopPageCard3'
 
 

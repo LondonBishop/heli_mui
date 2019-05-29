@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import BankAccountTop from '../components/BankAccountTop';
-import BankTable from '../components/BankTable';
+import BankAccountTop from '../components/accounts/BankAccountTop';
+import BankTable from '../components/accounts/BankTable';
 import Paper from '@material-ui/core/Paper';
-import HeliChart from '../components/HeliChart';
+import HeliChart from '../components/heli/HeliChart';
 
 
 class CreditCardContainer extends Component {

@@ -119,7 +119,7 @@ class Dashboard extends React.Component {
     topPage : null,
     bottomPage : null,
     selectedAccount : null,
-    isLoginIn : false,
+    isLoginIn : true,
     userName : null,
   };
 
@@ -131,6 +131,7 @@ class Dashboard extends React.Component {
 
 
   componentDidMount () {
+
     fetch ("http://localhost:3000/users/1", 
             {
               method: "GET",
@@ -307,7 +308,6 @@ class Dashboard extends React.Component {
     objNetWorth.totalCreditCards =  Number(objNetWorth.totalCreditCards.toFixed(2));
 
   }
-
 
 
   // **************************************************

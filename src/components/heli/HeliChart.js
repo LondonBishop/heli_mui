@@ -10,7 +10,7 @@ import {
   CardFooter
 } from "shards-react";
 
-import Chart from "../utils/chart";
+import Chart from "../../utils/chart";
 
 export default class HeliChart extends React.Component {
   constructor(props) {

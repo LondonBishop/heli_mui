@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Format from './Format';
+import Format from '../utils/Format';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
+
 
 
 class TopPageCard3 extends Component {
@@ -21,11 +22,8 @@ class TopPageCard3 extends Component {
                         <div className={classes.cardDesc}>
                             {Format.formatMoneys((this.props.objNetWorth.totalBills +  this.props.objNetWorth.totalCreditCards) * -1)}
                         </div>
-                        {/* <div >
-                            <button type='button' class='card-action-readMore'>Read More</button>
-                        </div> */}
                     </Paper>
-
+                   
                     <Paper className={classes.card}>
                         <img src={require('../images/networth.jpeg')} className={classes.cardImage} />
                         <div className={classes.cardTitle}>
@@ -34,9 +32,6 @@ class TopPageCard3 extends Component {
                         <div className={classes.cardDesc}>
                                 {Format.formatMoneys( this.props.objNetWorth.totalNetWorthWithOutBills) }
                         </div>
-                        {/* <div >
-                            <button type='button' class='card-action-readMore'>Read More</button>
-                        </div> */}
                     </Paper>
 
                     <Paper className={classes.card} style ={{backgroundColor: 'orange'}}>

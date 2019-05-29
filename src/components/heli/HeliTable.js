@@ -13,7 +13,7 @@ import TrendingDownOutlined from '@material-ui/icons/TrendingDownOutlined'
 import TrendingUpOutlined from '@material-ui/icons/TrendingUpOutlined'
 import Mood from '@material-ui/icons/Mood';
 import SentimentDissatisfiedRounded from '@material-ui/icons/SentimentDissatisfiedRounded';
-import Format from '../components/Format';
+import Format from '../../utils/Format';
 
 
 const styles = {
