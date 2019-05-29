@@ -10,22 +10,24 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-// import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
-// import { mainListItems, secondaryListItems } from '../mui_components/listItems';
-// import SimpleLineChart from '../../mui/SimpleLineChart';
-import SimpleTable from './SimpleTable';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItems from './MenuItems';
 import SecondListItems from './SecondaryMenuItems'
-// import { switchCase } from '@babel/types';
 import BankAccountContainer from '../containers/BankAccountContainer'; 
 import BillsContainer from '../containers/BillsContainer';
 import HeliContainer from '../containers/HeliContainer';
+import CreditCardContainer from '../containers/CreditCardContainer';
+import LoginPage from '../components/LoginPage';
+import Paper from '@material-ui/core/Paper';
+// import drawerImage from '../images/heli3.jpg';
+
+
+
+
 
 const drawerWidth = 240;
-
 
 const styles = theme => ({
   root: {
@@ -92,6 +94,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     height: '100vh',
     overflow: 'auto',
+    // backgroundImage: 'url(' + drawerImage + ')'
   },
   chartContainer: {
     marginLeft: -22,
@@ -102,6 +105,12 @@ const styles = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+
+  toolbarLogo : {
+    width : '50px',
+    height : '50px',
+    marginRight : '40px',
+  }
 });
 
 
@@ -113,8 +122,11 @@ class Dashboard extends React.Component {
     bankAccounts  : [],
     creditCards : [],
     bills : [],
-    topPage : "creditcards",
+    topPage : null,
     bottomPage : null,
+    selectedAccount : null,
+    isLoginIn : false,
+    userName : null,
   };
 
   objNetWorth = {
@@ -123,8 +135,10 @@ class Dashboard extends React.Component {
     totalNetWorthWithOutBills : 0,
   }
 
+
   componentDidMount () {
-    fetch ("http://localhost:3000/user", 
+
+    fetch ("http://localhost:3000/users/1", 
             {
               method: "GET",
               headers:{
@@ -148,20 +162,62 @@ class Dashboard extends React.Component {
     this.setState({ open: false });
   };
 
-  handleSideBarClick = (event, selection) => {
-    event.preventDefault();
+  handleSideBarClick = (e, selection) => {
+    
+    e.preventDefault();
+
     this.setState({ 
       topPage : selection,
     });
-  }
+  };
+
+
+  handleSelectedAccount = (event, account) => {
+    event.preventDefault();
+    this.setState({ 
+      selectedAccount : account,
+    });
+  };
+
+
+  handleLoginClick = (userName, password) => {
+
+    console.log (userName + '   ' + password)
+    if (userName && password) {
+      if (userName === 'Harry' && password === "test123") {
+          this.setState({
+            isLoginIn : true,
+            userName : userName,
+            topPage : 'accounts',
+          })
+      } else {
+        alert("invalid username or password")
+      }
+
+    } else {
+      alert("Please enter a valid username and password")
+    }
+
+  };
+
+
+  handleLogoutClick () {
+    this.setState({
+      isLoginIn : null,
+      userName : null,
+      password: null,
+      topPage : null
+    })
+  };
+
  
 // ***** methods **********************************************************
 
   loadMasterData (userData) {
 
-    let bankData = userData.filter( dataElement => dataElement.entity === "bank");
-    let creditCardsData = userData.filter( dataElement => dataElement.entity === "creditcard");
-    let billsData = userData.filter( dataElement => dataElement.entity === "bill");
+    let bankData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bank");
+    let creditCardsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "creditcard");
+    let billsData = userData.entities.filter( dataElement => dataElement.entitytype.entity_desc === "bill");
 
     this.setState ( { 
       userData : userData,
@@ -179,37 +235,48 @@ class Dashboard extends React.Component {
   switchTopPage  = () => {
 
       switch (this.state.topPage) {
+
         case "accounts":
-          // return <TopPageList inBoundData={ this.state.bankAccounts } /> 
-          return <BankAccountContainer BankAccounts={ this.state.bankAccounts } />
-          break;
+              return <BankAccountContainer bankAccounts={ this.state.bankAccounts } />
+              break;
         
         case "creditcards":
-          // return <BankAccountContainer BankAccounts={ this.state.creditCards } />
-          break;
 
+                if (this.state.creditCards.length > 0) {
+                    if (this.state.selectedAccount) {
+                        return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.selectedAccount } handleSelectedAccount={ this.handleSelectedAccount }/>
+                    } else {
+                        return <CreditCardContainer creditCards={ this.state.creditCards } selectedAccount={ this.state.creditCards[0] } handleSelectedAccount={ this.handleSelectedAccount }/>
+                    }
+                } else {
+                    // bring screen up with + cc button.
+                }
+
+                break;
 
         case "bills" :
-          return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
-          break;
+                return <BillsContainer bills={ this.state.bills } creditCards={ this.state.creditCards } objNetWorth={ this.objNetWorth } />
+                break;
 
         case "invest" :
-          break;
+                break;
 
         case "heli" :
-          return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
-          break;
-
-        default:
+                return <HeliContainer objNetWorth={this.objNetWorth} bankAccounts={ this.state.bankAccounts } />
+                break;
+        
+        case 'logout': 
+                this.handleLogoutClick();
+                break;
 
       }
   }
 
 
   calculateBalanceIndicator = (account) => {
-  
-      if (account.transactions[0].balance !== 0) {
-        if (account.transactions[account.transactions.length -1].balance > account.transactions[0].balance ) {
+
+      if (account.accountlines[0].balance !== 0) {
+        if (account.accountlines[account.accountlines.length -1].balance > account.accountlines[0].balance ) {
             account.balanceIndicator = "down"
         } else {
             account.balanceIndicator = "up"
@@ -229,26 +296,24 @@ class Dashboard extends React.Component {
 
     // bank accounts 
     bankAccounts.forEach( bank => {
-      objNetWorth.totalNetWorthWithOutBills += bank.transactions[0].balance;
+      objNetWorth.totalNetWorthWithOutBills += Number(bank.accountlines[0].balance);
     })
     
      //credit cards
     creditCards.forEach (creditCard => {
-      objNetWorth.totalCreditCards += Number(creditCard.transactions[0].balance) * -1;
+      objNetWorth.totalCreditCards += Number(creditCard.accountlines[0].balance) * -1;
     });
 
     //bills
     bills.forEach (bill => { 
-      objNetWorth.totalBills += Number(bill.transactions[0].amount);
+      objNetWorth.totalBills += Number(bill.accountlines[0].amount);
     });
 
-    // objNetWorth.totalBills = totalBillsAndCC.toFixed(2);
-    // objNetWorth.totalNetWorthWithOutBills = totalNetWorthWithOutBills.toFixed(2); 
-    // objNetWorth.totalNetWorthWithBills = (Number(objNetWorth.totalNetWorthWithOutBills) + Number(objNetWorth.totalBills)).toFixed(2);
-   
+    objNetWorth.totalBills = Number(objNetWorth.totalBills.toFixed(2));
+    objNetWorth.totalNetWorthWithOutBills = Number(objNetWorth.totalNetWorthWithOutBills.toFixed(2));
+    objNetWorth.totalCreditCards =  Number(objNetWorth.totalCreditCards.toFixed(2));
+
   }
-
-
 
 
   // **************************************************
@@ -258,77 +323,80 @@ class Dashboard extends React.Component {
 
     const { classes } = this.props;
 
-    
-
     return (
+      <div>
+          { this.state.isLoginIn ? 
+                <div className={classes.root}>
 
-      <div className={classes.root}>
+                      <CssBaseline />
 
-        <CssBaseline />
+                      <AppBar
+                          position="absolute"
+                          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+                        >
+                        <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                        
+                          <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            onClick={this.handleDrawerOpen}
+                            className={ classNames( classes.menuButton, this.state.open && classes.menuButtonHidden,) }
+                          
+                          >
+                            <MenuIcon />
+                          </IconButton>
+                          <Typography
+                            component="h1"
+                            variant="h6"
+                            color="inherit"
+                            noWrap
+                            className={classes.title}
+                          >
+                                Helicopter Finance
+                          </Typography>
+                          
 
-        <AppBar
-            position="absolute"
-            className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
-          >
-          <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={ classNames( classes.menuButton, this.state.open && classes.menuButtonHidden,) }
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Helicopter
-            </Typography>
+                        </Toolbar>
+                      </AppBar>
 
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-                </Badge>
-            </IconButton> */}
+                      <Drawer
+                        variant="permanent"
+                        classes={{
+                          paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                        }}
+                        open={this.state.open}
+                        
+                      >
+                        <div className={classes.toolbarIcon}>
+                          <img src={require('../images/HeliLogo.png')} className={classes.toolbarLogo}  />
+                          <IconButton onClick={this.handleDrawerClose}>
+                            <ChevronLeftIcon />
+                          </IconButton>
+                        </div>
+                        {/* <Divider />
+                        <IconButton><AccountCircle /> Hi {this.state.userName}! </IconButton>    */}
+                        <Divider />
+                        <List><MenuItems handleSideBarClick={ this.handleSideBarClick }/></List>
+                        <Divider />
+                        <List><SecondListItems  user={this.state.userName}  handleSideBarClick={this.handleSideBarClick } /></List>
+                      </Drawer>
 
-          </Toolbar>
-        </AppBar>
+                      <main className={classes.content}>
 
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List><MenuItems handleSideBarClick={ this.handleSideBarClick }/></List>
-          <Divider />
-          <List><SecondListItems /></List>
-        </Drawer>
+                            <div className={classes.appBarSpacer} />
 
-        <main className={classes.content}>
+                            {/* top Page */}
+                            {this.switchTopPage(classes)}
+                            
+                            {/* //bottom Page  */}
 
-              <div className={classes.appBarSpacer} />
+                      </main>
 
-              {/* top Page */}
-              {this.switchTopPage(classes)}
-
-              {/* //bottom Page  */}
-
-        </main>
-
+                </div>
+          : <LoginPage handleLoginClick={ this.handleLoginClick }/>
+      }
       </div>
-    );
+    )
   }
 }
 

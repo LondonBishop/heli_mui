@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import BillSelector from '../components/BillSelector'
+import BillSelector from '../components/bills/BillSelector'
 
 
 
@@ -11,12 +11,15 @@ class BillsSelectorContainer extends Component {
    
   render () {  
 
-    const { classes } = this.props;
+    const { classes, handleBillsDueChange } = this.props;
 
     return (
             <div>
                 <Paper className={classes.root} elevation={1}>
-                <BillSelector />
+                <Typography variant="h6" gutterBottom component="h2" style={{ marginTop : 5}}>
+                    Payments coming up...
+                </Typography>
+                <BillSelector handleBillsDueChange={ handleBillsDueChange }/>
                 </Paper>
             </div>
          );
@@ -33,6 +36,7 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
+      width: '80%',
     },
   });
 

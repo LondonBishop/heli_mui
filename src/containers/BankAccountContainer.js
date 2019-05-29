@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-// import tileData from './tileData';
-import TopPageCard2 from '../components/TopPageCard2'
-import BankAccountTop from '../components/BankAccountTop'
-import SimpleTable from '../components/SimpleTable'
-import BankTable from '../components/BankTable'
-import Divider from '@material-ui/core/Divider';
-
-
-// const tileData =[ {name: "Barclays", balance : "2,650.44"}, {name : "Citi", balance: "12.99"}, {name : "Halifax Saver", balance: "36,500.99"}]
+import BankAccountTop from '../components/accounts/BankAccountTop'
+import BankTable from '../components/accounts/BankTable'
+import Paper from '@material-ui/core/Paper';
 
 class BankAccountContainer extends Component {
 
@@ -29,33 +17,24 @@ class BankAccountContainer extends Component {
     }
 
     setDefaultAccount = () => {
-      if (this.props.BankAccounts) {
+      if (this.props.bankAccounts) {
         this.setState({
-          selectedAccount : this.props.BankAccounts[0]
+          selectedAccount : this.props.bankAccounts[0]
         })
       }
     }
 
-    componentDidMount () {
-    
-    }
+
 
     static getDerivedStateFromProps(props, state){
       
-        if (props.BankAccounts[0] !== state.selectedAccount) {
+        if (props.bankAccounts[0] !== state.selectedAccount) {
           return {selectedAccount: state.selectedAccount }
         } else return null
       
     }
   
     
-    // static getDerivedStateFromProps(props, state) {
-    //   return {
-    //     state.selectedBankId: props.inBoundData[0].id,
-    //     state.selectedBankTransactions : props.inBoundData[0].transactions,  
-    //   }
-    // }
-
 
 // EVENT handlers **************************************************
 
@@ -67,18 +46,21 @@ class BankAccountContainer extends Component {
       handleSelectCard = (event, account) => {
         
         event.preventDefault();
-        console.log ("event ---> select card")
 
+        this.props.bankAccounts.forEach ( bankAcc => {
+          const resetCard = document.getElementById("CARD" + bankAcc.id)
+          if (resetCard.id !== account.id) {
+              resetCard.style.backgroundColor = "#eaeaea"
+          }
+      });
 
-        this.setState ( { 
+        let selectedCard = document.getElementById("CARD" + account.id)
+        selectedCard.style.backgroundColor = "#fcae3c"
+        
+        this.setState ({
           selectedAccount : account
-         });
+        })
       }
-
-
-      switchBottomPageView = () => {
-      }
-
 
       
 
@@ -87,42 +69,26 @@ class BankAccountContainer extends Component {
 
       render() {
 
-        const { classes, BankAccounts } = this.props
-        
-        console.log ("Bank Account Container ")
+        const { classes, bankAccounts } = this.props
+      
         
         return (
 
-          <div className={classes.root}>
-              <div className={classes.gridList}>
-                  <BankAccountTop BankAccounts ={ BankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+          <div >
+            <div className={classes.root}>
+              <Paper >
+                  <BankAccountTop BankAccounts ={ bankAccounts }  handleSelectCard={ this.handleSelectCard } handleEditCard={ this.handleEditCard }/>
+              </Paper>
               </div>
-              <Divider variant="middle" style={ { marginTop : 45 } }/>
-              {/* <BottomData firstTimeInFlag={firstTimeInFlag} /> */}
-             
-              {/* {  !inBoundData[0] && this.state.selectedBankId ? 
-                  null
-                  : 
-                  <div className={classes.tableContainer}>
-                      <BankTable inBoundData={ inBoundData[0].transactions } />
-                  </div>
-              } */}
 
-              {/* { 
-                inBoundData[0]
-                ? 
-                <div className={classes.tableContainer}>
-                  <BankTable inBoundData={ inBoundData[0].transactions } />
-                </div>
-                : null
-              }
-                //  */}
-        
-                {/* <BankTable inBoundData={ this.state.account } /> */}
-            { this.state.selectedAccount ?
-                 <BankTable account={ this.state.selectedAccount } />: null }
-                  {/* <BankTable account={""}/>}  */}
-              {/* {<BankTable inBoundData={ this.state.account } />} */}
+              {/* <Divider variant="middle" style={ { marginTop : 45 } }/> */}
+              <div className={classes.root}>
+              <Paper>
+              { this.state.selectedAccount ?
+                 <BankTable account={ this.state.selectedAccount } />
+                 : null }
+              </Paper>
+              </div>
           </div>
         );
       }
@@ -133,16 +99,21 @@ class BankAccountContainer extends Component {
   const styles = theme => ({
       root: {
         display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        flexWrap: 'nowrap',
+        width : '100%',
+        // marginBottom : '5px',
+        // justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
+        padding : '15px',
       },
       gridList: {
-        flexWrap: 'nowrap',
+        display: 'flex',
+        flexWrap: 'wrap',
+        minWidth:'50%',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
-        cols : 1
+        cols : 1,
       },
       title: {
         color: theme.palette.primary.light,

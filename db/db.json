@@ -123,7 +123,6 @@
       "transactions" : [
               {
                 "duedate" : "19/04/2019",
-                "bill_desc" : "CoffeeClub",
                 "paidfrom" : 3,
                 "amount": "-19.22",
                 "recurring" : "week"    
