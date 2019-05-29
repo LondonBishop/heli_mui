@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import BankAccountTop from '../components/BankAccountTop'
-import BankTable from '../components/BankTable'
-import Paper from '@material-ui/core/Paper'
+import BankAccountTop from '../components/BankAccountTop';
+import BankTable from '../components/BankTable';
+import Paper from '@material-ui/core/Paper';
+import HeliChart from '../components/HeliChart';
 
 
 class CreditCardContainer extends Component {
@@ -75,6 +76,9 @@ class CreditCardContainer extends Component {
                     { this.setCardColor( creditCards, selectedAccount) }
                             <BankTable account={ selectedAccount } /> 
                     </Paper>    
+                    <Paper style={{width :375, height:375}}>
+                      <HeliChart />
+                    </Paper>
                 </div>
         );
       }

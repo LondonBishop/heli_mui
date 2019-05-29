@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import BillsTable from '../components/BillsTable'
 import Typography from '@material-ui/core/Typography'
 import BillTotal from '../components/BillsTotal'
-import Divider from '@material-ui/core/Divider'
+import Paper from '@material-ui/core/Paper'
 import BillSelectorContainer from '../containers/BillsSelectorContainer';
 import Format from '../components/Format';
+import HeliChart from '../components/HeliChart';
 
 
 export default class BillsContainer extends Component {
@@ -31,8 +32,24 @@ export default class BillsContainer extends Component {
           }
       ))
       
-      return [...newData1, ...newData2]  
+      let togetherData = [...newData1, ...newData2]  
+      
+       //sort array in date order.
+      togetherData.sort(function(a,b) {
+                    let dateA = a.r2.split('/')
+                    let dateB = b.r2.split('/')
+                
+                    let newDateA = new Date(dateA[2], dateA[1] - 1, dateA[0])
+                    let newDateB = new Date(dateB[2], dateB[1] - 1, dateB[0])
+                    return newDateA - newDateB
+    
+        });
+
+      return togetherData;
+
     };
+
+
 
     checkTransDate = (dueDate, selection) => {
 
@@ -72,14 +89,15 @@ export default class BillsContainer extends Component {
 
     loadBillsTable = (selection) => {
 
-        // const { bills, creditCards, objNetWorth } = this.props
+        const { bills, creditCards, objNetWorth } = this.props
       
-        let combinedData = this.combinedData( this.props.bills, this.props.creditCards )
+        let combinedData = this.combinedData( bills, creditCards )
   
         switch (selection) {
+
             case "1":
             return <div><BillsTable combinedData={ combinedData } />
-                    <BillTotal totalBills={ this.props.objNetWorth.totalBills + this.props.objNetWorth.totalCreditCards } /></div>
+                    <BillTotal totalBills={ objNetWorth.totalBills + objNetWorth.totalCreditCards } /></div>
             break;
 
            case "2":                
@@ -120,14 +138,8 @@ export default class BillsContainer extends Component {
         return (
             <div>
                 <BillSelectorContainer handleBillsDueChange={ this.handleBillsDueChange } style ={{marginBottom : 20}} />
-
-                {/* <Divider variant="middle" style={ { marginBottom: 15 } }/> */}
-                {/* <Typography variant="h6" gutterBottom component="h2" style={{ marginTop : 25}}>
-                    Payments coming up...
-                </Typography> */}
-
                 { this.loadBillsTable(this.state.billsFilter) }
-
+                
             </div>
         );
     }

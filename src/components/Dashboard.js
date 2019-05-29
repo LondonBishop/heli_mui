@@ -119,7 +119,7 @@ class Dashboard extends React.Component {
     topPage : null,
     bottomPage : null,
     selectedAccount : null,
-    isLoginIn : null,
+    isLoginIn : false,
     userName : null,
   };
 
@@ -176,17 +176,21 @@ class Dashboard extends React.Component {
   handleLoginClick = (userName, password) => {
 
     console.log (userName + '   ' + password)
+    if (userName && password) {
+      if (userName === 'Harry' && password === "test123") {
+          this.setState({
+            isLoginIn : true,
+            userName : userName,
+            topPage : 'accounts',
+          })
+      } else {
+        alert("invalid username or password")
+      }
 
-    if (userName || password)
-    {
-      this.setState({
-          isLoginIn : true,
-          userName : userName,
-          topPage : 'accounts',
-      })
     } else {
       alert("Please enter a valid username and password")
     }
+
   };
 
 
