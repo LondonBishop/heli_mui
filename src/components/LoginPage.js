@@ -98,7 +98,7 @@ const styles = theme => ({
         padding : '50px',
         backgroundImage: 'url(' + drawerImage + ')',
         width :  '100%',
-        height: '100%',
+        height: '900px',
     },
 
     body : {
@@ -115,7 +115,8 @@ const styles = theme => ({
 
     form : {
         width: '280px',
-        margin: '4em auto',
+        marginLeft: '631px',
+        marginTop : '155px',
         padding: '1.0em 2em 2em 2em',
         // background: '#fafafa',
         background : 'white',
