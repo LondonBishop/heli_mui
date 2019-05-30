@@ -20,8 +20,13 @@ const styles = {
   root: {
     width: '75%',
     overflowX: 'auto',
+    marginLeft : '20px',
+    marginBottom : '15px',
+    marginTop : '10px',
+
   },
   table: {
+    width : '75%',
     minWidth: '525px',
   },
 };

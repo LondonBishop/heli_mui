@@ -37,10 +37,10 @@ const styles = theme => ({
       ...theme.mixins.gutters(),
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
-      maxWidth : '85%',
+      maxWidth : '80%',
       backgroundColor: '#fafafa',
     },
-    
+
   });
 
 export default withStyles(styles)(HeliContainer);
