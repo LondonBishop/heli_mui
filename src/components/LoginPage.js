@@ -97,6 +97,8 @@ const styles = theme => ({
     backdrop : {
         padding : '50px',
         backgroundImage: 'url(' + drawerImage + ')',
+        width :  '100%',
+        height: '100%',
     },
 
     body : {

@@ -18,11 +18,11 @@ import Format from '../../utils/Format';
 
 const styles = {
   root: {
-    width: '100%',
+    width: '75%',
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: '525px',
   },
 };
 

@@ -72,11 +72,12 @@ class CreditCardContainer extends Component {
                         <BankAccountTop BankAccounts ={ creditCards }  handleSelectCard={ handleSelectedAccount } handleEditCard={ this.handleEditCard }/>
                     </Paper>
         
-                    <Paper className={classes.table}>
-                    { this.setCardColor( creditCards, selectedAccount) }
-                            <BankTable account={ selectedAccount } /> 
-                    </Paper>    
-                    <Paper style={{width :375, height:375}}>
+                    <div className={classes.table}>
+                        { this.setCardColor( creditCards, selectedAccount) }
+                        <BankTable account={ selectedAccount } /> 
+                    </div>   
+
+                    <Paper className={ classes.hchart }>
                       <HeliChart />
                     </Paper>
                 </div>
@@ -92,20 +93,31 @@ class CreditCardContainer extends Component {
         flexWrap: 'wrap',
         // justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
+        backgroundColor: '#fafafa',
+        padding:'0em 1em 4em 1em',
       },
       gridList: {
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
         cols : 1,
-        width : '100%',
+        width : '78%',
+        marginTop : '25px',
       }, 
 
       table : {
-          marginTop : 10, 
-          marginBottom : 10,
-          maxWidth : '80%'
+          // marginTop : 10, 
+          // marginBottom : 10,
+          // maxWidth : '80%',
+          marginTop: '2em',
+          // margin : '4em, 1em, 1em, 1em',
+      },
+
+      hchart : {
+        width : 375, 
+        height: 375,
+        margin : '30px',
       }
     });
     

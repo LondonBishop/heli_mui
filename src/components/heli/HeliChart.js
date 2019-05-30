@@ -20,6 +20,7 @@ export default class HeliChart extends React.Component {
   }
 
   componentDidMount() {
+
     const chartConfig = {
       type: "pie",
       data: this.props.chartData,

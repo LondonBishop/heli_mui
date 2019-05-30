@@ -38,7 +38,9 @@ const styles = theme => ({
       paddingTop: theme.spacing.unit * 2,
       paddingBottom: theme.spacing.unit * 2,
       maxWidth : '85%',
+      backgroundColor: '#fafafa',
     },
+    
   });
 
 export default withStyles(styles)(HeliContainer);
