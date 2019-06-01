@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper'
-import FormGroup from '@material-ui/core/FormGroup'
-import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import drawerImage from '../images/backdrop2.jpg';
 import logoImage from '../images/HeliLongLogo.png';
 
@@ -97,6 +93,8 @@ const styles = theme => ({
     backdrop : {
         padding : '50px',
         backgroundImage: 'url(' + drawerImage + ')',
+        width :  '100%',
+        height: '900px',
     },
 
     body : {
@@ -113,7 +111,8 @@ const styles = theme => ({
 
     form : {
         width: '280px',
-        margin: '4em auto',
+        marginLeft: '631px',
+        marginTop : '155px',
         padding: '1.0em 2em 2em 2em',
         // background: '#fafafa',
         background : 'white',

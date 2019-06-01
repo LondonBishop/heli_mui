@@ -75,7 +75,7 @@ const styles = theme => ({
     card : {
         display: 'inline-block',
         width: '30%',
-        // minWidth: '250px',
+        maxWidth: '255px',
         boxSizing: 'border-box',
         boxShadow: '2px 2px 25px 0px transparentize(black,0.3)',
         borderRadius: '3px',

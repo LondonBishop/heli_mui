@@ -104,7 +104,8 @@ class BankAccountContainer extends Component {
         // marginBottom : '5px',
         // justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
+        backgroundColor: '#fafafa',
         padding : '15px',
       },
       gridList: {

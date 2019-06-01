@@ -18,11 +18,16 @@ import Format from '../../utils/Format';
 
 const styles = {
   root: {
-    width: '100%',
+    width: '75%',
     overflowX: 'auto',
+    marginLeft : '20px',
+    marginBottom : '15px',
+    marginTop : '10px',
+
   },
   table: {
-    minWidth: 700,
+    width : '75%',
+    minWidth: '525px',
   },
 };
 
